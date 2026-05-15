@@ -212,6 +212,27 @@ function setupNavbarScroll() {
   }, { passive: true });
 }
 
+// ---- Dropdown click ----
+function setupDropdowns() {
+  document.querySelectorAll('.navbar__dropdown').forEach(dropdown => {
+    const trigger = dropdown.querySelector('.navbar__link');
+    if (!trigger) return;
+
+    trigger.addEventListener('click', e => {
+      e.preventDefault();
+      const isOpen = dropdown.classList.contains('open');
+      document.querySelectorAll('.navbar__dropdown').forEach(d => d.classList.remove('open'));
+      if (!isOpen) dropdown.classList.add('open');
+    });
+  });
+
+  document.addEventListener('click', e => {
+    if (!e.target.closest('.navbar__dropdown')) {
+      document.querySelectorAll('.navbar__dropdown').forEach(d => d.classList.remove('open'));
+    }
+  });
+}
+
 // ---- Smooth scroll for # links ----
 function setupSmoothScroll() {
   document.querySelectorAll('a[href^="#"]').forEach(anchor => {
@@ -257,6 +278,7 @@ document.addEventListener('DOMContentLoaded', () => {
   setupHamburger();
   setupNavbarScroll();
   setupSmoothScroll();
+  setupDropdowns();
 
   // Listen for cart changes from other scripts
   window.addEventListener('carrito-updated', updateCartBadge);

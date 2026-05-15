@@ -182,7 +182,7 @@ h1, h2, h3, h4, h5, h6 {
   z-index: 100;
 }
 
-.navbar__dropdown:hover .navbar__dropdown-menu {
+.navbar__dropdown.open .navbar__dropdown-menu {
   display: flex;
 }
 
@@ -1986,6 +1986,39 @@ h1, h2, h3, h4, h5, h6 {
     grid-template-columns: 1fr;
     gap: 2rem;
   }
+}
+
+/* ============================================================
+   FILTRO GÉNERO
+   ============================================================ */
+.filter-genero {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.filter-genero__btn {
+  padding: 0.45rem 1.2rem;
+  border: 1px solid #d0c8be;
+  background: none;
+  font-family: var(--font-secondary);
+  font-size: 0.65rem;
+  font-weight: 500;
+  letter-spacing: 2px;
+  color: #888;
+  cursor: pointer;
+  transition: 0.25s;
+  border-radius: 1px;
+}
+
+.filter-genero__btn:hover {
+  border-color: #1a1a1a;
+  color: #1a1a1a;
+}
+
+.filter-genero__btn.active {
+  background: #1a1a1a;
+  border-color: #1a1a1a;
+  color: #e8d8c7;
 }
 
 /* ============================================================

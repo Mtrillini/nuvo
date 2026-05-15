@@ -83,14 +83,17 @@ function renderProductos(lista) {
 }
 
 // ---- Filtro + sort ----
+let generoActivo = '';
+
 function aplicarFiltros() {
   const search = (document.getElementById('search-input')?.value || '').toLowerCase();
   const sort   = document.getElementById('sort-select')?.value || 'recent';
 
-  let lista = PRODUCTOS.filter(p =>
-    p.nombre.toLowerCase().includes(search) ||
-    p.marca.toLowerCase().includes(search)
-  );
+  let lista = PRODUCTOS.filter(p => {
+    const matchSearch = p.nombre.toLowerCase().includes(search) || p.marca.toLowerCase().includes(search);
+    const matchGenero = !generoActivo || p.genero === generoActivo;
+    return matchSearch && matchGenero;
+  });
 
   if (sort === 'price-asc')  lista.sort((a, b) => a.precio - b.precio);
   if (sort === 'price-desc') lista.sort((a, b) => b.precio - a.precio);
@@ -161,10 +164,29 @@ window.agregarDesdeModal = agregarDesdeModal;
 
 // ---- Init ----
 document.addEventListener('DOMContentLoaded', () => {
+  // Leer genero desde URL
+  const params = new URLSearchParams(window.location.search);
+  const generoUrl = params.get('genero') || '';
+  if (generoUrl) {
+    generoActivo = generoUrl;
+    document.querySelectorAll('.filter-genero__btn').forEach(btn => {
+      btn.classList.toggle('active', btn.dataset.genero === generoUrl);
+    });
+  }
+
   aplicarFiltros();
 
   document.getElementById('search-input')?.addEventListener('input', () => aplicarFiltros());
   document.getElementById('sort-select')?.addEventListener('change', () => aplicarFiltros());
+
+  document.querySelectorAll('.filter-genero__btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      generoActivo = btn.dataset.genero;
+      document.querySelectorAll('.filter-genero__btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      aplicarFiltros();
+    });
+  });
 
   document.addEventListener('keydown', e => { if (e.key === 'Escape') cerrarModal(); });
 });
