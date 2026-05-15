@@ -1988,6 +1988,10 @@ h1, h2, h3, h4, h5, h6 {
   }
 }
 
+body.page-productos {
+  background-color: #ffffff;
+}
+
 body.page-productos .section {
   padding: 2rem 2rem;
 }
@@ -2231,7 +2235,7 @@ body.page-productos .section {
 .prod-modal__close:hover { color: #1a1a1a; }
 
 .prod-modal__img-wrap {
-  background: #f8f5f0;
+  background: #ffffff;
   display: flex;
   align-items: center;
   justify-content: center;
