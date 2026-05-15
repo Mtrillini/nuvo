@@ -41,8 +41,10 @@ function agregarItem(producto, cantidad = 1) {
     carrito.items.push({
       id:         producto.id,
       nombre:     producto.nombre,
+      marca:      producto.marca || '',
+      tipo:       producto.tipo || '',
       precio:     parseFloat(producto.precio),
-      imagen_url: producto.imagen_url || '',
+      imagen_url: producto.img || producto.imagen_url || '',
       cantidad:   Math.min(cantidad, producto.stock ?? 999),
       stock:      producto.stock ?? 999,
     });
@@ -116,29 +118,33 @@ function renderCarrito() {
 
   if (carrito.items.length === 0) {
     container.innerHTML = `
-      <div class="empty-state">
-        <div class="empty-state__icon">◇</div>
-        <div class="empty-state__title">Tu carrito está vacío</div>
-        <p class="empty-state__text">Explorá nuestra colección y encontrá tu esencia.</p>
-        <br>
-        <a href="/nuve-ecommerce/frontend/productos.html" class="btn btn-primary" style="display:inline-flex;margin-top:1rem;">Ver productos</a>
+      <div class="cart-empty">
+        <div class="cart-empty__icon">◇</div>
+        <div class="cart-empty__title">Tu carrito está vacío</div>
+        <p class="cart-empty__text">Explorá nuestra colección y encontrá tu fragancia.</p>
+        <a href="/nuvo/frontend/productos.html" class="cart-empty__btn">VER PERFUMES</a>
       </div>
     `;
     if (summaryContainer) renderSummary(carrito);
     return;
   }
 
+  const fmt = window.formatMoney || (v => '$ ' + v.toLocaleString('es-AR'));
+
   const itemsHTML = carrito.items.map(item => `
     <div class="cart-item" data-id="${item.id}">
-      <img
-        class="cart-item__img"
-        src="${item.imagen_url || 'https://via.placeholder.com/80x80/F2ECE6/0D0D0D?text=NUVE'}"
-        alt="${item.nombre}"
-        onerror="this.src='https://via.placeholder.com/80x80/F2ECE6/0D0D0D?text=NUVE'"
-      >
+      <div class="cart-item__img-wrap">
+        <img
+          class="cart-item__img"
+          src="${item.imagen_url || ''}"
+          alt="${item.nombre}"
+        >
+      </div>
       <div class="cart-item__info">
         <div class="cart-item__name">${item.nombre}</div>
-        <div class="cart-item__price">${window.formatMoney ? window.formatMoney(item.precio) : '$' + item.precio} c/u</div>
+        ${item.marca ? `<div class="cart-item__marca">${item.marca}</div>` : ''}
+        ${item.tipo  ? `<div class="cart-item__tipo">${item.tipo}</div>`   : ''}
+        <div class="cart-item__price">${fmt(item.precio)} c/u</div>
       </div>
       <div class="cart-item__right">
         <div class="qty-control">
@@ -146,9 +152,7 @@ function renderCarrito() {
           <span class="qty-control__value">${item.cantidad}</span>
           <button class="qty-control__btn" onclick="handleQtyChange(${item.id}, 1)" aria-label="Sumar">+</button>
         </div>
-        <div style="font-family:var(--font-secondary);font-size:0.9rem;font-weight:500;color:var(--negro);">
-          ${window.formatMoney ? window.formatMoney(item.precio * item.cantidad) : '$' + (item.precio * item.cantidad)}
-        </div>
+        <div class="cart-item__subtotal">${fmt(item.precio * item.cantidad)}</div>
         <button class="cart-item__remove" onclick="handleRemove(${item.id})">Eliminar</button>
       </div>
     </div>
@@ -180,20 +184,20 @@ function renderSummary(carrito) {
         <span>Envío</span>
         <span>${subtotal > 0 ? 'A calcular' : '—'}</span>
       </div>
+      <div class="order-summary__divider"></div>
       <div class="order-summary__row order-summary__row--total">
         <span>Total estimado</span>
         <span>${fmt(total)}</span>
       </div>
       <div class="order-summary__actions">
-        <a href="/nuve-ecommerce/frontend/checkout.html"
-           class="btn btn-primary"
-           style="text-align:center;${isEmpty ? 'pointer-events:none;opacity:0.5;' : ''}">
-          Proceder al pago
+        <a href="/nuvo/frontend/checkout.html"
+           class="order-summary__btn-primary${isEmpty ? ' disabled' : ''}">
+          PROCEDER AL PAGO
         </a>
-        <a href="/nuve-ecommerce/frontend/productos.html" class="btn btn-secondary" style="text-align:center;">
-          Seguir comprando
+        <a href="/nuvo/frontend/productos.html" class="order-summary__btn-secondary">
+          SEGUIR COMPRANDO
         </a>
-        ${!isEmpty ? `<button onclick="handleVaciar()" class="cart-item__remove" style="text-align:center;margin-top:0.5rem;">Vaciar carrito</button>` : ''}
+        ${!isEmpty ? `<button onclick="handleVaciar()" class="order-summary__btn-vaciar">Vaciar carrito</button>` : ''}
       </div>
     </div>
   `;
