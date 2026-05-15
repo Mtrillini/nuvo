@@ -424,6 +424,100 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 /* ============================================================
+   COLECCIONES PANELS (Homepage)
+   ============================================================ */
+.colecciones-panels {
+  display: flex;
+  width: 100%;
+  height: 480px;
+}
+
+.colecciones-panel {
+  flex: 1;
+  display: flex;
+  align-items: flex-end;
+  padding: 3.5rem 4rem;
+  text-decoration: none;
+  position: relative;
+  overflow: hidden;
+  transition: flex 0.5s ease;
+}
+
+.colecciones-panel:hover {
+  flex: 1.08;
+}
+
+.colecciones-panel--dark {
+  background: linear-gradient(135deg, #0d0d0d 0%, #1a1a1a 60%, #2a2018 100%);
+}
+
+.colecciones-panel--light {
+  background: linear-gradient(135deg, #e8ddd0 0%, #d6c9b8 60%, #c8b89e 100%);
+}
+
+.colecciones-panel__content {
+  position: relative;
+  z-index: 1;
+}
+
+.colecciones-panel__label {
+  font-family: var(--font-secondary);
+  font-size: 0.72rem;
+  font-weight: 400;
+  letter-spacing: 4px;
+  margin-bottom: 0.3rem;
+}
+
+.colecciones-panel--dark .colecciones-panel__label {
+  color: rgba(232, 216, 199, 0.7);
+}
+
+.colecciones-panel--light .colecciones-panel__label {
+  color: rgba(40, 30, 20, 0.65);
+}
+
+.colecciones-panel__title {
+  font-family: var(--font-primary);
+  font-size: clamp(2.2rem, 4vw, 3.5rem);
+  font-weight: 300;
+  letter-spacing: 0.05em;
+  line-height: 1;
+  margin-bottom: 1.5rem;
+}
+
+.colecciones-panel--dark .colecciones-panel__title {
+  color: #e8d8c7;
+}
+
+.colecciones-panel--light .colecciones-panel__title {
+  color: #1a120a;
+}
+
+.colecciones-panel__cta {
+  display: inline-block;
+  font-family: var(--font-secondary);
+  font-size: 0.7rem;
+  font-weight: 500;
+  letter-spacing: 3px;
+  padding-bottom: 3px;
+  transition: 0.3s;
+}
+
+.colecciones-panel--dark .colecciones-panel__cta {
+  color: #d8b894;
+  border-bottom: 1px solid #d8b894;
+}
+
+.colecciones-panel--light .colecciones-panel__cta {
+  color: #3a2810;
+  border-bottom: 1px solid #3a2810;
+}
+
+.colecciones-panel:hover .colecciones-panel__cta {
+  letter-spacing: 4px;
+}
+
+/* ============================================================
    COLLECTIONS GRID (Homepage)
    ============================================================ */
 .collections-grid {
