@@ -25,8 +25,13 @@ function getNavbarHTML() {
       <nav class="navbar__nav">
         <a href="/nuvo/frontend/index.html" class="navbar__link" data-page="index">INICIO</a>
         <a href="/nuvo/frontend/productos.html" class="navbar__link" data-page="productos">PERFUMES</a>
-        <a href="/nuvo/frontend/productos.html" class="navbar__link" data-page="colecciones">COLECCIONES</a>
-        <a href="/nuvo/frontend/originales.html" class="navbar__link" data-page="originales">EXCLUSIVOS</a>
+        <div class="navbar__dropdown">
+          <a href="#" class="navbar__link">COLECCIONES</a>
+          <div class="navbar__dropdown-menu">
+            <a href="/nuvo/frontend/productos.html?genero=femenino" class="navbar__dropdown-item">FEMENINO</a>
+            <a href="/nuvo/frontend/productos.html?genero=masculino" class="navbar__dropdown-item">MASCULINO</a>
+          </div>
+        </div>
         <a href="/nuvo/frontend/nosotros.html" class="navbar__link" data-page="nosotros">SOBRE NÜVE</a>
       </nav>
 
@@ -51,9 +56,9 @@ function getNavbarHTML() {
     <div class="mobile-menu" id="mobile-menu">
       <a href="/nuvo/frontend/index.html">Inicio</a>
       <a href="/nuvo/frontend/productos.html">Perfumes</a>
-      <a href="/nuvo/frontend/originales.html">Exclusivos</a>
+      <a href="/nuvo/frontend/productos.html?genero=femenino">Colecciones Femenino</a>
+      <a href="/nuvo/frontend/productos.html?genero=masculino">Colecciones Masculino</a>
       <a href="/nuvo/frontend/nosotros.html">Sobre NÜVE</a>
-      <a href="/nuvo/frontend/contacto.html">Contacto</a>
       <a href="/nuvo/frontend/carrito.html">Carrito</a>
     </div>
   `;

@@ -164,6 +164,45 @@ h1, h2, h3, h4, h5, h6 {
   width: 100%;
 }
 
+/* Dropdown COLECCIONES */
+.navbar__dropdown {
+  position: relative;
+}
+
+.navbar__dropdown-menu {
+  display: none;
+  position: absolute;
+  top: calc(100% + 18px);
+  left: 50%;
+  transform: translateX(-50%);
+  background: #0a0a0a;
+  border: 1px solid rgba(255,255,255,0.12);
+  min-width: 160px;
+  flex-direction: column;
+  z-index: 100;
+}
+
+.navbar__dropdown:hover .navbar__dropdown-menu {
+  display: flex;
+}
+
+.navbar__dropdown-item {
+  padding: 12px 20px;
+  color: #e7e7e7;
+  font-family: var(--font-secondary);
+  font-size: 11px;
+  font-weight: 400;
+  letter-spacing: 3px;
+  text-decoration: none;
+  transition: 0.3s;
+  text-align: center;
+}
+
+.navbar__dropdown-item:hover {
+  color: #d8b894;
+  background: rgba(255,255,255,0.04);
+}
+
 /* Icons - right */
 .navbar__icons {
   display: flex;
