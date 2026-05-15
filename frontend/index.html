@@ -54,6 +54,11 @@
   </section>
 
   <!-- ============================================================
+       MÁS VENDIDOS
+       ============================================================ -->
+  <div id="mas-vendidos"></div>
+
+  <!-- ============================================================
        PRODUCTOS DESTACADOS
        ============================================================ -->
   <section class="section" style="background-color:var(--crema);">
@@ -141,6 +146,209 @@
   <div id="footer"></div>
 
   <!-- Scripts -->
+  <script>
+  (function () {
+    const productos = [
+      { rank: 1, nombre: 'La Bomba',        marca: 'Carolina Herrera',  tipo: 'Eau de Parfum', precio: 100000, img: '/nuvo/frontend/images/prod-labomba.webp' },
+      { rank: 2, nombre: 'Scandal Absolu',  marca: 'Jean Paul Gaultier', tipo: 'Eau de Parfum', precio: 100000, img: '/nuvo/frontend/images/prod-scandal.jpg'  },
+      { rank: 3, nombre: 'Phantom EDT',     marca: 'Paco Rabanne',       tipo: 'Eau de Toilette', precio: 100000, img: '/nuvo/frontend/images/prod-phantom.webp' },
+      { rank: 4, nombre: '212 VIP Black',   marca: 'Carolina Herrera',  tipo: 'Eau de Parfum', precio: 100000, img: '/nuvo/frontend/images/prod-212vip.jpg'   },
+    ];
+
+    const fmt = n => '$ ' + n.toLocaleString('es-AR');
+
+    const section = document.getElementById('mas-vendidos');
+    if (!section) return;
+
+    Object.assign(section.style, {
+      background: '#f5f0eb',
+      padding: '4rem 3rem',
+      fontFamily: "'Montserrat', sans-serif",
+    });
+
+    // Header
+    const header = document.createElement('div');
+    Object.assign(header.style, {
+      display: 'flex',
+      alignItems: 'flex-start',
+      justifyContent: 'space-between',
+      marginBottom: '2.5rem',
+    });
+
+    const titleWrap = document.createElement('div');
+
+    const title = document.createElement('h2');
+    title.textContent = 'MÁS VENDIDOS';
+    Object.assign(title.style, {
+      fontFamily: "'Cormorant', Georgia, serif",
+      fontSize: '2rem',
+      fontWeight: '300',
+      letterSpacing: '4px',
+      color: '#1a1a1a',
+      marginBottom: '0.4rem',
+    });
+
+    const deco = document.createElement('div');
+    deco.innerHTML = '✦';
+    Object.assign(deco.style, { color: '#c8a97e', fontSize: '0.7rem', paddingLeft: '2px' });
+
+    titleWrap.appendChild(title);
+    titleWrap.appendChild(deco);
+
+    const verTodos = document.createElement('a');
+    verTodos.textContent = 'VER TODOS LOS PRODUCTOS';
+    verTodos.href = '/nuvo/frontend/productos.html';
+    Object.assign(verTodos.style, {
+      fontFamily: "'Montserrat', sans-serif",
+      fontSize: '0.68rem',
+      fontWeight: '500',
+      letterSpacing: '2.5px',
+      color: '#555',
+      textDecoration: 'none',
+      borderBottom: '1px solid #999',
+      paddingBottom: '2px',
+      alignSelf: 'center',
+    });
+
+    header.appendChild(titleWrap);
+    header.appendChild(verTodos);
+    section.appendChild(header);
+
+    // Grid
+    const grid = document.createElement('div');
+    Object.assign(grid.style, {
+      display: 'grid',
+      gridTemplateColumns: 'repeat(4, 1fr)',
+      gap: '1.5rem',
+      maxWidth: '1200px',
+      margin: '0 auto',
+    });
+
+    productos.forEach(p => {
+      const card = document.createElement('div');
+      Object.assign(card.style, {
+        background: '#fff',
+        borderRadius: '4px',
+        border: '1px solid #e8e0d8',
+        overflow: 'hidden',
+        display: 'flex',
+        flexDirection: 'column',
+        transition: 'box-shadow 0.3s',
+        position: 'relative',
+        cursor: 'pointer',
+      });
+      card.addEventListener('mouseenter', () => card.style.boxShadow = '0 8px 30px rgba(0,0,0,0.10)');
+      card.addEventListener('mouseleave', () => card.style.boxShadow = 'none');
+
+      // Rank badge
+      const badge = document.createElement('span');
+      badge.textContent = '#' + p.rank;
+      Object.assign(badge.style, {
+        position: 'absolute',
+        top: '12px',
+        left: '12px',
+        background: '#e8ddd0',
+        color: '#6b5a45',
+        fontSize: '0.6rem',
+        fontWeight: '600',
+        letterSpacing: '1px',
+        padding: '3px 7px',
+        borderRadius: '2px',
+      });
+
+      // Image
+      const imgWrap = document.createElement('div');
+      Object.assign(imgWrap.style, {
+        background: '#faf8f5',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        padding: '2rem 1.5rem',
+        height: '240px',
+      });
+      const img = document.createElement('img');
+      img.src = p.img;
+      img.alt = p.nombre;
+      Object.assign(img.style, { maxHeight: '180px', maxWidth: '100%', objectFit: 'contain' });
+
+      imgWrap.appendChild(img);
+
+      // Info
+      const info = document.createElement('div');
+      Object.assign(info.style, { padding: '1.2rem 1.2rem 1.4rem' });
+
+      const nombre = document.createElement('div');
+      nombre.textContent = p.nombre;
+      Object.assign(nombre.style, {
+        fontFamily: "'Cormorant', Georgia, serif",
+        fontSize: '1.15rem',
+        fontWeight: '400',
+        letterSpacing: '1px',
+        color: '#1a1a1a',
+        marginBottom: '2px',
+      });
+
+      const marca = document.createElement('div');
+      marca.textContent = p.marca;
+      Object.assign(marca.style, {
+        fontSize: '0.68rem',
+        color: '#888',
+        letterSpacing: '1px',
+        marginBottom: '2px',
+      });
+
+      const tipo = document.createElement('div');
+      tipo.textContent = p.tipo;
+      Object.assign(tipo.style, {
+        fontSize: '0.65rem',
+        color: '#aaa',
+        letterSpacing: '0.5px',
+        marginBottom: '0.8rem',
+      });
+
+      const precio = document.createElement('div');
+      precio.textContent = fmt(p.precio);
+      Object.assign(precio.style, {
+        fontSize: '1rem',
+        fontWeight: '600',
+        color: '#1a1a1a',
+        marginBottom: '1rem',
+      });
+
+      const btn = document.createElement('button');
+      btn.textContent = 'AGREGAR AL CARRITO';
+      Object.assign(btn.style, {
+        width: '100%',
+        padding: '0.75rem',
+        background: '#1a1a1a',
+        color: '#e8d8c7',
+        border: 'none',
+        fontFamily: "'Montserrat', sans-serif",
+        fontSize: '0.65rem',
+        fontWeight: '600',
+        letterSpacing: '2.5px',
+        cursor: 'pointer',
+        transition: 'background 0.3s',
+      });
+      btn.addEventListener('mouseenter', () => btn.style.background = '#3a2810');
+      btn.addEventListener('mouseleave', () => btn.style.background = '#1a1a1a');
+
+      info.appendChild(nombre);
+      info.appendChild(marca);
+      info.appendChild(tipo);
+      info.appendChild(precio);
+      info.appendChild(btn);
+
+      card.appendChild(badge);
+      card.appendChild(imgWrap);
+      card.appendChild(info);
+      grid.appendChild(card);
+    });
+
+    section.appendChild(grid);
+  })();
+  </script>
+
   <script src="/nuvo/frontend/js/config.js"></script>
   <script src="/nuvo/frontend/js/main.js"></script>
   <script src="/nuvo/frontend/js/carrito.js"></script>
