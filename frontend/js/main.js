@@ -71,19 +71,13 @@ function getFooterHTML() {
       <div class="footer__top">
         <div>
           <div class="footer__logo">NÜVE</div>
-          <p class="footer__tagline">
-            Perfumería de autor.<br>
-            Esencias únicas para quienes<br>
-            buscan lo extraordinario.
-          </p>
         </div>
 
         <div>
           <div class="footer__heading">Navegación</div>
           <nav class="footer__nav">
             <a href="/nuvo/frontend/index.html">Inicio</a>
-            <a href="/nuvo/frontend/originales.html">Originales</a>
-            <a href="/nuvo/frontend/testers.html">Testers</a>
+            <a href="/nuvo/frontend/productos.html">Perfumes</a>
             <a href="/nuvo/frontend/nosotros.html">Nosotros</a>
             <a href="/nuvo/frontend/contacto.html">Contacto</a>
           </nav>
