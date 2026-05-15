@@ -9,6 +9,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="/nuvo/frontend/css/style.css">
+  <link href="https://api.fontshare.com/v2/css?f[]=garet@400,700&display=swap" rel="stylesheet">
 </head>
 <body>
 
@@ -34,6 +35,11 @@
   </section>
 
   <!-- ============================================================
+       MÁS VENDIDOS
+       ============================================================ -->
+  <div id="mas-vendidos"></div>
+
+  <!-- ============================================================
        COLECCIONES
        ============================================================ -->
   <section class="colecciones-panels">
@@ -55,11 +61,6 @@
     </a>
 
   </section>
-
-  <!-- ============================================================
-       MÁS VENDIDOS
-       ============================================================ -->
-  <div id="mas-vendidos"></div>
 
   <!-- ============================================================
        PRODUCTOS DESTACADOS
@@ -278,10 +279,10 @@
       const nombre = document.createElement('div');
       nombre.textContent = p.nombre;
       Object.assign(nombre.style, {
-        fontFamily: "'Cormorant', Georgia, serif",
-        fontSize: '1.15rem',
-        fontWeight: '400',
-        letterSpacing: '1px',
+        fontFamily: "'Garet', 'Nunito', sans-serif",
+        fontSize: '1.05rem',
+        fontWeight: '700',
+        letterSpacing: '0.5px',
         color: '#1a1a1a',
         marginBottom: '2px',
       });
