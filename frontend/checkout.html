@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="NÜVE — Finalizar compra.">
+  <title>Checkout — NÜVE Perfumería</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/nuve-ecommerce/frontend/css/style.css">
+</head>
+<body>
+
+  <div id="navbar"></div>
+
+  <div style="padding-top:80px;"></div>
+
+  <div class="checkout-layout">
+
+    <!-- Checkout Form -->
+    <div>
+      <!-- Progress indicator -->
+      <div class="checkout-progress">
+        <div class="progress-step done">
+          <span class="progress-step__num">✓</span>
+          <span>Carrito</span>
+        </div>
+        <div class="progress-divider"></div>
+        <div class="progress-step active">
+          <span class="progress-step__num">2</span>
+          <span>Datos</span>
+        </div>
+        <div class="progress-divider"></div>
+        <div class="progress-step">
+          <span class="progress-step__num">3</span>
+          <span>Pago</span>
+        </div>
+      </div>
+
+      <h1 class="checkout-form__title">Tus datos</h1>
+
+      <form id="checkout-form" novalidate>
+        <div class="form-grid">
+
+          <div class="form-group">
+            <label class="form-label" for="nombre">Nombre</label>
+            <input type="text" id="nombre" class="form-input" required autocomplete="given-name" placeholder="Juan">
+            <span class="form-error"></span>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="apellido">Apellido</label>
+            <input type="text" id="apellido" class="form-input" required autocomplete="family-name" placeholder="Pérez">
+            <span class="form-error"></span>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="email">Email</label>
+            <input type="email" id="email" class="form-input" required autocomplete="email" placeholder="juan@email.com">
+            <span class="form-error"></span>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="telefono">Teléfono</label>
+            <input type="tel" id="telefono" class="form-input" required autocomplete="tel" placeholder="+54 11 5555-0000">
+            <span class="form-error"></span>
+          </div>
+
+          <div class="form-group form-group--full">
+            <label class="form-label" for="direccion">Dirección</label>
+            <input type="text" id="direccion" class="form-input" required autocomplete="street-address" placeholder="Av. Santa Fe 1234, Piso 3, Depto A">
+            <span class="form-error"></span>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="ciudad">Ciudad</label>
+            <input type="text" id="ciudad" class="form-input" required autocomplete="address-level2" placeholder="Buenos Aires">
+            <span class="form-error"></span>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="provincia">Provincia</label>
+            <input type="text" id="provincia" class="form-input" required autocomplete="address-level1" placeholder="Buenos Aires">
+            <span class="form-error"></span>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="cp">Código Postal</label>
+            <input type="text" id="cp" class="form-input" required autocomplete="postal-code" placeholder="1425">
+            <span class="form-error"></span>
+          </div>
+
+        </div>
+
+        <div class="checkout-submit">
+          <button type="submit" id="btn-pagar" class="btn btn-primary" style="font-size:0.75rem;padding:1rem 2.5rem;">
+            Pagar con MercadoPago
+          </button>
+
+          <div class="mp-badge">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+            </svg>
+            Pago 100% seguro — Encriptado SSL
+          </div>
+
+          <div>
+            <a href="/nuve-ecommerce/frontend/carrito.html"
+               style="font-family:var(--font-secondary);font-size:0.72rem;font-weight:400;color:var(--taupe);letter-spacing:0.08em;text-decoration:underline;">
+              ← Volver al carrito
+            </a>
+          </div>
+        </div>
+      </form>
+    </div>
+
+    <!-- Order Summary (right column) -->
+    <div id="checkout-summary"></div>
+
+  </div>
+
+  <div id="footer"></div>
+
+  <script src="/nuve-ecommerce/frontend/js/config.js"></script>
+  <script src="/nuve-ecommerce/frontend/js/main.js"></script>
+  <script src="/nuve-ecommerce/frontend/js/carrito.js"></script>
+  <script src="/nuve-ecommerce/frontend/js/checkout.js"></script>
+</body>
+</html>

@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="NÜVE Perfumería — Esencias premium de autor. Originales y Testers.">
+  <title>NÜVE — Perfumería de Autor</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/nuve-ecommerce/frontend/css/style.css">
+</head>
+<body>
+
+  <!-- Navbar (injected by main.js) -->
+  <div id="navbar"></div>
+
+  <!-- ============================================================
+       HERO
+       ============================================================ -->
+  <section class="hero">
+    <div class="hero__brand">NÜVE</div>
+    <div class="hero__ornament">
+      <span class="hero__diamond">✦</span>
+    </div>
+    <p class="hero__subtitle">Esencia que te representa</p>
+    <a href="/nuve-ecommerce/frontend/productos.html" class="hero__cta">Explorar colección</a>
+  </section>
+
+  <!-- ============================================================
+       COLECCIONES
+       ============================================================ -->
+  <section class="section" style="background-color:var(--blanco);">
+    <div class="section-header">
+      <h2 class="section-title">Nuestras Colecciones</h2>
+      <div class="section-line"><span>✦</span></div>
+      <p class="section-subtitle">Dos mundos, una misma esencia</p>
+    </div>
+
+    <div class="collections-grid" style="max-width:1100px;margin:0 auto;">
+      <div class="collection-card">
+        <img
+          class="collection-card__image"
+          src="https://via.placeholder.com/700x900/0D0D0D/F2ECE6?text=ORIGINALES"
+          alt="Originales"
+        >
+        <div class="collection-card__overlay">
+          <div class="collection-card__title">Originales</div>
+          <a href="/nuve-ecommerce/frontend/originales.html" class="collection-card__link">Descubrir</a>
+        </div>
+      </div>
+
+      <div class="collection-card">
+        <img
+          class="collection-card__image"
+          src="https://via.placeholder.com/700x900/A8A29A/F2ECE6?text=TESTERS"
+          alt="Testers"
+        >
+        <div class="collection-card__overlay">
+          <div class="collection-card__title">Testers</div>
+          <a href="/nuve-ecommerce/frontend/testers.html" class="collection-card__link">Descubrir</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       PRODUCTOS DESTACADOS
+       ============================================================ -->
+  <section class="section" style="background-color:var(--crema);">
+    <div class="section-header">
+      <h2 class="section-title">Productos Destacados</h2>
+      <div class="section-line"><span>✦</span></div>
+      <p class="section-subtitle">Selección de la temporada</p>
+    </div>
+    <div id="featured-grid" class="productos-grid"></div>
+
+    <div style="text-align:center;margin-top:3rem;">
+      <a href="/nuve-ecommerce/frontend/productos.html" class="btn btn-secondary">Ver colección completa</a>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       FILOSOFÍA
+       ============================================================ -->
+  <section class="section section--dark">
+    <div class="section-header">
+      <h2 class="section-title" style="color:var(--crema);">Nuestra Filosofía</h2>
+      <div class="section-line"><span>✦</span></div>
+    </div>
+
+    <div class="pillars">
+      <div class="pillar">
+        <div class="pillar__icon">◈</div>
+        <div class="pillar__title">Selección Cuidada</div>
+        <p class="pillar__text">
+          Cada fragancia es elegida por expertos que comprenden la artesanía
+          detrás de cada nota olfativa. Solo lo mejor llega a NÜVE.
+        </p>
+      </div>
+
+      <div class="pillar">
+        <div class="pillar__icon">◆</div>
+        <div class="pillar__title">Esencia Premium</div>
+        <p class="pillar__text">
+          Trabajamos directamente con distribuidores oficiales para garantizar
+          la autenticidad y calidad de cada pieza de nuestra colección.
+        </p>
+      </div>
+
+      <div class="pillar">
+        <div class="pillar__icon">◇</div>
+        <div class="pillar__title">Experiencia Exclusiva</div>
+        <p class="pillar__text">
+          Desde la presentación hasta la entrega, cada detalle está pensado
+          para que descubrir tu fragancia sea una experiencia memorable.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       QUOTE
+       ============================================================ -->
+  <section class="quote-section">
+    <p class="quote-text">
+      "Un perfume es como una música invisible, una melodia que se lleva en la piel
+      y que nadie más puede escuchar."
+    </p>
+    <div class="quote-author">— Filosofía NÜVE</div>
+  </section>
+
+  <!-- ============================================================
+       NEWSLETTER
+       ============================================================ -->
+  <section class="newsletter">
+    <div class="newsletter__title">Únite al mundo NÜVE</div>
+    <p class="newsletter__subtitle">Primero en conocer nuevas fragancias y ofertas exclusivas</p>
+    <form class="newsletter__form" onsubmit="handleNewsletter(event)">
+      <input
+        type="email"
+        class="newsletter__input"
+        placeholder="tu@email.com"
+        required
+        autocomplete="email"
+      >
+      <button type="submit" class="newsletter__btn">Suscribirme</button>
+    </form>
+  </section>
+
+  <!-- Footer (injected by main.js) -->
+  <div id="footer"></div>
+
+  <!-- Scripts -->
+  <script src="/nuve-ecommerce/frontend/js/config.js"></script>
+  <script src="/nuve-ecommerce/frontend/js/main.js"></script>
+  <script src="/nuve-ecommerce/frontend/js/carrito.js"></script>
+  <script src="/nuve-ecommerce/frontend/js/productos.js"></script>
+  <script>
+    function handleNewsletter(e) {
+      e.preventDefault();
+      const email = e.target.querySelector('input[type="email"]').value;
+      if (email) {
+        showToast('¡Gracias por suscribirte a NÜVE!', 'success');
+        e.target.reset();
+      }
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      loadFeaturedProductos();
+    });
+  </script>
+</body>
+</html>

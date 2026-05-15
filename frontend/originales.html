@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="NÜVE — Colección Originales. Fragancias premium de autor.">
+  <title>Originales — NÜVE Perfumería</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/nuve-ecommerce/frontend/css/style.css">
+</head>
+<body data-tipo="original">
+
+  <div id="navbar"></div>
+
+  <!-- Hero -->
+  <div class="page-hero">
+    <h1 class="page-hero__title">Originales</h1>
+    <p class="page-hero__subtitle">Fragancias completas — Experiencia total</p>
+  </div>
+
+  <!-- Filters -->
+  <section class="section" style="padding-bottom:0;">
+    <div class="filter-bar">
+      <input
+        type="search"
+        id="search-input"
+        class="filter-bar__search"
+        placeholder="Buscar fragancia original..."
+        autocomplete="off"
+      >
+      <select id="sort-select" class="filter-bar__select">
+        <option value="recent">Más recientes</option>
+        <option value="price-asc">Precio: menor a mayor</option>
+        <option value="price-desc">Precio: mayor a menor</option>
+        <option value="name">Nombre A-Z</option>
+      </select>
+      <span class="filter-bar__results" id="result-count"></span>
+    </div>
+  </section>
+
+  <!-- Products Grid -->
+  <section class="section" style="padding-top:1.5rem;">
+    <div id="productos-grid" class="productos-grid"></div>
+    <div id="pagination" class="pagination"></div>
+  </section>
+
+  <!-- CTA Section -->
+  <section class="section section--dark" style="text-align:center;padding:4rem 2rem;">
+    <p class="section-subtitle" style="margin-bottom:1rem;">¿Buscás explorar antes de comprometerte?</p>
+    <h2 class="section-title" style="color:var(--crema);margin-bottom:2rem;">Probá nuestros Testers</h2>
+    <a href="/nuve-ecommerce/frontend/testers.html" class="btn btn-outline-cream">Ver Testers</a>
+  </section>
+
+  <div id="footer"></div>
+
+  <script src="/nuve-ecommerce/frontend/js/config.js"></script>
+  <script src="/nuve-ecommerce/frontend/js/main.js"></script>
+  <script src="/nuve-ecommerce/frontend/js/carrito.js"></script>
+  <script src="/nuve-ecommerce/frontend/js/productos.js"></script>
+</body>
+</html>
