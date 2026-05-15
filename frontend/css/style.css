@@ -428,7 +428,6 @@ h1, h2, h3, h4, h5, h6 {
 .colecciones-panels {
   display: flex;
   width: 100%;
-  height: 480px;
 }
 
 .colecciones-panel {
@@ -451,7 +450,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .colecciones-panel--light {
-  background: linear-gradient(135deg, #e8ddd0 0%, #d6c9b8 60%, #c8b89e 100%);
+  background: linear-gradient(135deg, #ffffff 0%, #ffffff 60%, #c8b89e 100%);
 }
 
 .colecciones-panel__content {
