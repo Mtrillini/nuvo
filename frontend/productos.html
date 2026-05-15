@@ -1,23 +1,23 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="es">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="NÜVE — Todos los productos. Originales y Testers de autor.">
+  <meta name="description" content="NÜVE — Todos los productos. Perfumes de autor.">
   <title>Productos — NÜVE Perfumería</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link href="https://api.fontshare.com/v2/css?f[]=garet@400,700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="/nuvo/frontend/css/style.css">
 </head>
-<body data-tipo="">
+<body>
 
   <div id="navbar"></div>
 
   <!-- Hero -->
   <div class="page-hero">
-    <h1 class="page-hero__title">Todos los Productos</h1>
-    <p class="page-hero__subtitle">Originales &amp; Testers — Esencias de autor</p>
+    <h1 class="page-hero__title">TODOS LOS PRODUCTOS</h1>
   </div>
 
   <!-- Filters -->
@@ -41,10 +41,40 @@
   </section>
 
   <!-- Products Grid -->
-  <section class="section" style="padding-top:1.5rem;">
-    <div id="productos-grid" class="productos-grid"></div>
-    <div id="pagination" class="pagination"></div>
+  <section class="section" style="padding-top:1.5rem; background:#fff;">
+    <div id="productos-grid" class="productos-grid-nuve"></div>
   </section>
+
+  <!-- Modal detalle producto -->
+  <div id="producto-modal" class="prod-modal" style="display:none;">
+    <div class="prod-modal__overlay" onclick="cerrarModal()"></div>
+    <div class="prod-modal__box">
+      <button class="prod-modal__close" onclick="cerrarModal()">✕</button>
+      <div class="prod-modal__img-wrap">
+        <img id="modal-img" src="" alt="">
+      </div>
+      <div class="prod-modal__info">
+        <p id="modal-marca" class="prod-modal__marca"></p>
+        <h2 id="modal-nombre" class="prod-modal__nombre"></h2>
+        <p id="modal-tipo" class="prod-modal__tipo"></p>
+        <p id="modal-desc" class="prod-modal__desc"></p>
+        <div class="prod-modal__precio-wrap">
+          <span id="modal-precio" class="prod-modal__precio"></span>
+        </div>
+        <div class="prod-modal__qty-wrap">
+          <button onclick="cambiarQty(-1)">−</button>
+          <span id="modal-qty">1</span>
+          <button onclick="cambiarQty(1)">+</button>
+        </div>
+        <button class="prod-modal__btn" onclick="agregarDesdeModal()">AGREGAR AL CARRITO</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- WhatsApp flotante -->
+  <a href="https://wa.me/541139225427" class="whatsapp-btn" target="_blank" aria-label="WhatsApp">
+    <i class="fa-brands fa-whatsapp"></i>
+  </a>
 
   <div id="footer"></div>
 
