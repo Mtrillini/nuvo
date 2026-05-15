@@ -82,7 +82,7 @@ h1, h2, h3, h4, h5, h6 {
   left: 0;
   right: 0;
   z-index: 1000;
-  height: 105px;
+  height: 14%;
 
   background: linear-gradient(
     to bottom,
@@ -236,7 +236,7 @@ h1, h2, h3, h4, h5, h6 {
 .mobile-menu {
   display: none;
   position: fixed;
-  top: 105px;
+  top: 14%;
   left: 0;
   right: 0;
   bottom: 0;
@@ -269,7 +269,7 @@ h1, h2, h3, h4, h5, h6 {
    PAGE OFFSET (below fixed navbar)
    ============================================================ */
 .page-content {
-  padding-top: 105px;
+  padding-top: 14%;
 }
 
 /* ============================================================
