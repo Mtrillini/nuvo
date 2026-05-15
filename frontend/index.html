@@ -22,7 +22,10 @@
   <section class="hero-slider">
     <div class="slider__track" id="slider-track">
       <div class="slider__slide">
-        <img src="/nuvo/frontend/images/banner1.png" alt="NÜVE Banner 1">
+        <picture>
+          <source media="(max-width: 768px)" srcset="/nuvo/frontend/images/banner1-mobile.png">
+          <img src="/nuvo/frontend/images/banner1.png" alt="NÜVE Banner 1">
+        </picture>
       </div>
       <div class="slider__slide">
         <img src="/nuvo/frontend/images/banner2.png" alt="NÜVE Banner 2">
@@ -134,12 +137,7 @@
 
     // Header
     const header = document.createElement('div');
-    Object.assign(header.style, {
-      display: 'flex',
-      alignItems: 'flex-start',
-      justifyContent: 'space-between',
-      marginBottom: '2.5rem',
-    });
+    header.className = 'mv-header';
 
     const titleWrap = document.createElement('div');
 
@@ -181,17 +179,7 @@
 
     productos.forEach(p => {
       const card = document.createElement('div');
-      Object.assign(card.style, {
-        background: '#fff',
-        borderRadius: '4px',
-        border: '1px solid #e8e0d8',
-        overflow: 'hidden',
-        display: 'flex',
-        flexDirection: 'column',
-        transition: 'box-shadow 0.3s',
-        position: 'relative',
-        cursor: 'pointer',
-      });
+      card.className = 'mv-card';
       card.addEventListener('mouseenter', () => card.style.boxShadow = '0 8px 30px rgba(0,0,0,0.10)');
       card.addEventListener('mouseleave', () => card.style.boxShadow = 'none');
       card.addEventListener('click', () => { if (typeof abrirModal === 'function') abrirModal(p.rank); });
@@ -214,14 +202,7 @@
 
       // Image
       const imgWrap = document.createElement('div');
-      Object.assign(imgWrap.style, {
-        background: '#ffffff',
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-        height: '300px',
-        overflow: 'hidden',
-      });
+      imgWrap.className = 'mv-card__img-wrap';
       const img = document.createElement('img');
       img.src = p.img;
       img.alt = p.nombre;
