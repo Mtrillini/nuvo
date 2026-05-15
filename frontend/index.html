@@ -129,11 +129,8 @@
     const section = document.getElementById('mas-vendidos');
     if (!section) return;
 
-    Object.assign(section.style, {
-      background: '#ffffff',
-      padding: '4rem 3rem',
-      fontFamily: "'Montserrat', sans-serif",
-    });
+    section.className = 'mas-vendidos__section';
+    section.style.fontFamily = "'Montserrat', sans-serif";
 
     // Header
     const header = document.createElement('div');
@@ -180,13 +177,7 @@
 
     // Grid
     const grid = document.createElement('div');
-    Object.assign(grid.style, {
-      display: 'grid',
-      gridTemplateColumns: 'repeat(4, 1fr)',
-      gap: '1.5rem',
-      maxWidth: '1200px',
-      margin: '0 auto',
-    });
+    grid.className = 'mas-vendidos__grid';
 
     productos.forEach(p => {
       const card = document.createElement('div');
