@@ -1988,6 +1988,10 @@ h1, h2, h3, h4, h5, h6 {
   }
 }
 
+body.page-productos .section {
+  padding: 2rem 2rem;
+}
+
 /* ============================================================
    FILTRO GÉNERO
    ============================================================ */
@@ -2029,7 +2033,7 @@ h1, h2, h3, h4, h5, h6 {
   background: #0a0a0a;
   border-bottom: 1px solid rgba(200,169,126,0.25);
   padding: 0.85rem 2rem;
-  margin-top: 10%;
+  margin-top: 6%;
 }
 
 .promo-bar__items {
