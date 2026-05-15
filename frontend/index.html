@@ -28,13 +28,6 @@
       </div>
     </div>
 
-    <button class="slider__arrow slider__arrow--prev" id="slider-prev">
-      <i class="fa-solid fa-chevron-left"></i>
-    </button>
-    <button class="slider__arrow slider__arrow--next" id="slider-next">
-      <i class="fa-solid fa-chevron-right"></i>
-    </button>
-
     <div class="slider__dots">
       <button class="slider__dot active" data-index="0"></button>
       <button class="slider__dot" data-index="1"></button>
@@ -185,8 +178,6 @@
 
       function startAuto() { timer = setInterval(() => goTo(current + 1), 5000); }
 
-      document.getElementById('slider-prev').addEventListener('click', () => { clearInterval(timer); goTo(current - 1); startAuto(); });
-      document.getElementById('slider-next').addEventListener('click', () => { clearInterval(timer); goTo(current + 1); startAuto(); });
       dots.forEach(d => d.addEventListener('click', () => { clearInterval(timer); goTo(+d.dataset.index); startAuto(); }));
 
       startAuto();
