@@ -36,9 +36,6 @@ function getNavbarHTML() {
 
       <div class="navbar__icons">
         <a href="#" class="navbar__icon-link">
-          <i class="fa-solid fa-magnifying-glass"></i>
-        </a>
-        <a href="#" class="navbar__icon-link">
           <i class="fa-regular fa-user"></i>
         </a>
         <a href="/nuvo/frontend/carrito.html" class="navbar__cart" aria-label="Carrito">
