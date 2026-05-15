@@ -80,6 +80,32 @@
     </form>
   </section>
 
+  <!-- Modal detalle producto -->
+  <div id="producto-modal" class="prod-modal" style="display:none;">
+    <div class="prod-modal__overlay" onclick="cerrarModal()"></div>
+    <div class="prod-modal__box">
+      <button class="prod-modal__close" onclick="cerrarModal()">✕</button>
+      <div class="prod-modal__img-wrap">
+        <img id="modal-img" src="" alt="">
+      </div>
+      <div class="prod-modal__info">
+        <p id="modal-marca" class="prod-modal__marca"></p>
+        <h2 id="modal-nombre" class="prod-modal__nombre"></h2>
+        <p id="modal-tipo" class="prod-modal__tipo"></p>
+        <p id="modal-desc" class="prod-modal__desc"></p>
+        <div class="prod-modal__precio-wrap">
+          <span id="modal-precio" class="prod-modal__precio"></span>
+        </div>
+        <div class="prod-modal__qty-wrap">
+          <button onclick="cambiarQty(-1)">−</button>
+          <span id="modal-qty">1</span>
+          <button onclick="cambiarQty(1)">+</button>
+        </div>
+        <button class="prod-modal__btn" onclick="agregarDesdeModal()">AGREGAR AL CARRITO</button>
+      </div>
+    </div>
+  </div>
+
   <!-- Footer (injected by main.js) -->
   <div id="footer"></div>
 
@@ -177,6 +203,7 @@
       });
       card.addEventListener('mouseenter', () => card.style.boxShadow = '0 8px 30px rgba(0,0,0,0.10)');
       card.addEventListener('mouseleave', () => card.style.boxShadow = 'none');
+      card.addEventListener('click', () => { if (typeof abrirModal === 'function') abrirModal(p.rank); });
 
       // Rank badge
       const badge = document.createElement('span');
