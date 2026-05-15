@@ -70,7 +70,7 @@ function getFooterHTML() {
     <footer class="footer">
       <div class="footer__top">
         <div>
-          <div class="footer__logo">NÜVE</div>
+          <img src="/nuvo/frontend/images/logo-footer.png" alt="NÜVE" class="footer__logo-img">
         </div>
 
         <div>

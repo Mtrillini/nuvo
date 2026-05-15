@@ -932,6 +932,13 @@ h1, h2, h3, h4, h5, h6 {
   margin-bottom: 1rem;
 }
 
+.footer__logo-img {
+  height: 90px;
+  width: auto;
+  display: block;
+  margin-bottom: 1rem;
+}
+
 .footer__tagline {
   font-family: var(--font-secondary);
   font-size: 0.75rem;
