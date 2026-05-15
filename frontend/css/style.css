@@ -82,7 +82,7 @@ h1, h2, h3, h4, h5, h6 {
   left: 0;
   right: 0;
   z-index: 1000;
-  height: 14%;
+  height: 10%;
 
   background: linear-gradient(
     to bottom,
@@ -279,7 +279,7 @@ h1, h2, h3, h4, h5, h6 {
   position: relative;
   width: 100%;
   overflow: hidden;
-  margin-top: 6%;
+  margin-top: 5%;
   background: #000;
 }
 
