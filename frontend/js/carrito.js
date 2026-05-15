@@ -119,7 +119,6 @@ function renderCarrito() {
   if (carrito.items.length === 0) {
     container.innerHTML = `
       <div class="cart-empty">
-        <div class="cart-empty__icon">◇</div>
         <div class="cart-empty__title">Tu carrito está vacío</div>
         <p class="cart-empty__text">Explorá nuestra colección y encontrá tu fragancia.</p>
         <a href="/nuvo/frontend/productos.html" class="cart-empty__btn">VER PERFUMES</a>
