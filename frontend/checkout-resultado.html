@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="es">
 <head>
   <meta charset="UTF-8">
@@ -7,19 +7,22 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link href="https://api.fontshare.com/v2/css?f[]=garet@400,700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="/nuvo/frontend/css/style.css">
 </head>
-<body>
+<body class="page-checkout">
 
   <div id="navbar"></div>
 
-  <div style="min-height:100vh;display:flex;align-items:center;justify-content:center;padding:6rem 2rem 2rem;">
-    <div style="text-align:center;max-width:520px;">
-      <div id="result-icon" style="font-size:3.5rem;margin-bottom:1.5rem;color:var(--champagne);">◆</div>
-      <h1 id="result-title" class="section-title" style="margin-bottom:1rem;"></h1>
-      <p id="result-msg" style="font-family:var(--font-secondary);font-size:0.85rem;font-weight:300;color:var(--taupe);line-height:1.7;margin-bottom:2rem;"></p>
-      <div id="result-pedido" style="font-family:var(--font-secondary);font-size:0.78rem;color:var(--taupe);margin-bottom:2rem;"></div>
-      <a href="/nuvo/frontend/index.html" class="btn btn-primary">Volver al inicio</a>
+  <div class="checkout-resultado">
+    <div class="checkout-resultado__box">
+      <div id="result-icon" class="checkout-resultado__icon"></div>
+      <h1 id="result-title" class="checkout-resultado__title"></h1>
+      <p id="result-msg" class="checkout-resultado__msg"></p>
+      <p id="result-pedido" class="checkout-resultado__pedido"></p>
+      <a href="/nuvo/frontend/index.html" class="order-summary__btn-primary" style="display:inline-block;margin-top:2rem;padding:0.9rem 2.5rem;">
+        VOLVER AL INICIO
+      </a>
     </div>
   </div>
 
@@ -30,47 +33,42 @@
   <script src="/nuvo/frontend/js/carrito.js"></script>
   <script>
     document.addEventListener('DOMContentLoaded', () => {
-      const params = new URLSearchParams(window.location.search);
-      const status   = params.get('status')    || 'pending';
-      const pedidoId = params.get('pedido_id') || '';
-
-      const icon    = document.getElementById('result-icon');
-      const title   = document.getElementById('result-title');
-      const msg     = document.getElementById('result-msg');
-      const pedidoEl= document.getElementById('result-pedido');
+      const params    = new URLSearchParams(window.location.search);
+      const status    = params.get('status')    || 'pending';
+      const pedidoId  = params.get('pedido_id') || '';
 
       const configs = {
         success: {
           icon:  '✦',
           color: '#7cb87c',
           title: '¡Pago aprobado!',
-          msg:   'Gracias por tu compra. Tu pedido ha sido confirmado y nos pondremos en contacto para coordinar el envío. Revisá tu email para más detalles.',
+          msg:   'Gracias por tu compra. Tu pedido ha sido confirmado y nos pondremos en contacto para coordinar el envío.',
         },
         failure: {
           icon:  '◇',
           color: '#c07b7b',
           title: 'Pago rechazado',
-          msg:   'Tu pago no pudo ser procesado. Podés intentarlo nuevamente o contactarnos para buscar una solución.',
+          msg:   'Tu pago no pudo ser procesado. Podés intentarlo nuevamente o contactarnos para encontrar una solución.',
         },
         pending: {
           icon:  '◆',
-          color: 'var(--champagne)',
+          color: '#c8b89e',
           title: 'Pago pendiente',
           msg:   'Tu pago está siendo procesado. Te notificaremos por email cuando se confirme. Gracias por tu paciencia.',
         },
       };
 
       const config = configs[status] || configs.pending;
-      icon.textContent  = config.icon;
-      icon.style.color  = config.color;
-      title.textContent = config.title;
-      msg.textContent   = config.msg;
+      const iconEl  = document.getElementById('result-icon');
+      iconEl.textContent = config.icon;
+      iconEl.style.color = config.color;
+      document.getElementById('result-title').textContent = config.title;
+      document.getElementById('result-msg').textContent   = config.msg;
 
       if (pedidoId) {
-        pedidoEl.textContent = `Número de pedido: #${pedidoId}`;
+        document.getElementById('result-pedido').textContent = `Número de pedido: #${pedidoId}`;
       }
 
-      // Clear cart on success
       if (status === 'success' && window.Carrito) {
         window.Carrito.vaciar();
       }

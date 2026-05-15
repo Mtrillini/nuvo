@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="es">
 <head>
   <meta charset="UTF-8">
@@ -8,19 +8,44 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link href="https://api.fontshare.com/v2/css?f[]=garet@400,700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="/nuvo/frontend/css/style.css">
 </head>
-<body>
+<body class="page-checkout">
 
   <div id="navbar"></div>
 
-  <div style="padding-top:80px;"></div>
+  <!-- Banner promocional -->
+  <div class="promo-bar">
+    <div class="promo-bar__items">
+      <span class="promo-bar__item">
+        <i class="fa-solid fa-credit-card"></i>
+        3 cuotas sin interés
+      </span>
+      <span class="promo-bar__sep">✦</span>
+      <span class="promo-bar__item">
+        <i class="fa-solid fa-money-bill-wave"></i>
+        10% desc. abonando en efectivo
+      </span>
+      <span class="promo-bar__sep">✦</span>
+      <span class="promo-bar__item">
+        <i class="fa-solid fa-truck"></i>
+        Envíos a domicilio
+      </span>
+    </div>
+  </div>
+
+  <!-- Título de página -->
+  <div class="cart-page-header">
+    <h1 class="cart-page-title">Finalizar Compra</h1>
+  </div>
 
   <div class="checkout-layout">
 
-    <!-- Checkout Form -->
+    <!-- Formulario -->
     <div>
-      <!-- Progress indicator -->
+
+      <!-- Progress -->
       <div class="checkout-progress">
         <div class="progress-step done">
           <span class="progress-step__num">✓</span>
@@ -38,7 +63,7 @@
         </div>
       </div>
 
-      <h1 class="checkout-form__title">Tus datos</h1>
+      <h2 class="checkout-form__title">Tus datos</h2>
 
       <form id="checkout-form" novalidate>
         <div class="form-grid">
@@ -94,31 +119,30 @@
         </div>
 
         <div class="checkout-submit">
-          <button type="submit" id="btn-pagar" class="btn btn-primary" style="font-size:0.75rem;padding:1rem 2.5rem;">
-            Pagar con MercadoPago
+          <button type="submit" id="btn-pagar" class="checkout-submit__btn">
+            PAGAR CON MERCADOPAGO
           </button>
-
           <div class="mp-badge">
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
               <path stroke-linecap="round" stroke-linejoin="round" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
             </svg>
             Pago 100% seguro — Encriptado SSL
           </div>
-
-          <div>
-            <a href="/nuvo/frontend/carrito.html"
-               style="font-family:var(--font-secondary);font-size:0.72rem;font-weight:400;color:var(--taupe);letter-spacing:0.08em;text-decoration:underline;">
-              ← Volver al carrito
-            </a>
-          </div>
+          <a href="/nuvo/frontend/carrito.html" class="checkout-submit__back">← Volver al carrito</a>
         </div>
+
       </form>
     </div>
 
-    <!-- Order Summary (right column) -->
+    <!-- Resumen del pedido -->
     <div id="checkout-summary"></div>
 
   </div>
+
+  <!-- WhatsApp flotante -->
+  <a href="https://wa.me/541139225427" class="whatsapp-btn" target="_blank" aria-label="WhatsApp">
+    <i class="fa-brands fa-whatsapp"></i>
+  </a>
 
   <div id="footer"></div>
 

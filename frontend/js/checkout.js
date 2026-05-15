@@ -14,10 +14,7 @@ function renderCheckoutSummary() {
     container.innerHTML = `
       <div class="order-summary">
         <div class="order-summary__title">Tu pedido</div>
-        <p style="font-family:var(--font-secondary);font-size:0.8rem;color:var(--taupe);">El carrito está vacío.</p>
-        <div class="order-summary__actions" style="margin-top:1rem;">
-          <a href="/nuve-ecommerce/frontend/carrito.html" class="btn btn-secondary" style="text-align:center;">Volver al carrito</a>
-        </div>
+        <p style="font-family:var(--font-secondary);font-size:0.8rem;color:#888;">El carrito está vacío.</p>
       </div>
     `;
     return;
@@ -26,7 +23,7 @@ function renderCheckoutSummary() {
   const subtotal = window.Carrito.getTotal();
   const itemsHTML = carrito.items.map(item => `
     <div class="order-summary__row">
-      <span style="font-family:var(--font-primary);font-size:1rem;">${item.nombre} <span style="font-size:0.75rem;color:var(--taupe);">x${item.cantidad}</span></span>
+      <span class="order-summary__item-name">${item.nombre} <span class="order-summary__item-qty">x${item.cantidad}</span></span>
       <span>${fmt(item.precio * item.cantidad)}</span>
     </div>
   `).join('');
@@ -35,23 +32,15 @@ function renderCheckoutSummary() {
     <div class="order-summary">
       <div class="order-summary__title">Tu pedido</div>
       ${itemsHTML}
-      <div class="order-summary__row">
-        <span>Subtotal</span>
-        <span>${fmt(subtotal)}</span>
-      </div>
+      <div class="order-summary__divider"></div>
       <div class="order-summary__row">
         <span>Envío</span>
         <span>A calcular</span>
       </div>
+      <div class="order-summary__divider"></div>
       <div class="order-summary__row order-summary__row--total">
-        <span>Total</span>
+        <span>Total estimado</span>
         <span>${fmt(subtotal)}</span>
-      </div>
-      <div style="margin-top:1.5rem;" class="mp-badge">
-        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
-          <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
-        </svg>
-        Pago seguro con MercadoPago
       </div>
     </div>
   `;
@@ -172,7 +161,7 @@ async function submitCheckout(e) {
       const pedidoId = json.data?.pedido?.id;
       showToast('Pedido creado correctamente.', 'success');
       setTimeout(() => {
-        window.location.href = `/nuve-ecommerce/frontend/checkout-resultado.html?status=pending&pedido_id=${pedidoId}`;
+        window.location.href = `/nuvo/frontend/checkout-resultado.html?status=pending&pedido_id=${pedidoId}`;
       }, 1200);
     }
 
@@ -214,7 +203,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (!carrito.items || carrito.items.length === 0) {
       if (document.getElementById('checkout-form')) {
         showToast('Tu carrito está vacío.', 'info');
-        setTimeout(() => { window.location.href = '/nuve-ecommerce/frontend/carrito.html'; }, 1500);
+        setTimeout(() => { window.location.href = '/nuvo/frontend/carrito.html'; }, 1500);
       }
     }
   }, 500);
