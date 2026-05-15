@@ -16,15 +16,29 @@
   <div id="navbar"></div>
 
   <!-- ============================================================
-       HERO
+       HERO SLIDER
        ============================================================ -->
-  <section class="hero">
-    <div class="hero__brand">NÜVE</div>
-    <div class="hero__ornament">
-      <span class="hero__diamond">✦</span>
+  <section class="hero-slider">
+    <div class="slider__track" id="slider-track">
+      <div class="slider__slide">
+        <img src="/nuvo/frontend/images/banner1.png" alt="NÜVE Banner 1">
+      </div>
+      <div class="slider__slide">
+        <img src="/nuvo/frontend/images/banner2.png" alt="NÜVE Banner 2">
+      </div>
     </div>
-    <p class="hero__subtitle">Esencia que te representa</p>
-    <a href="/nuvo/frontend/productos.html" class="hero__cta">Explorar colección</a>
+
+    <button class="slider__arrow slider__arrow--prev" id="slider-prev">
+      <i class="fa-solid fa-chevron-left"></i>
+    </button>
+    <button class="slider__arrow slider__arrow--next" id="slider-next">
+      <i class="fa-solid fa-chevron-right"></i>
+    </button>
+
+    <div class="slider__dots">
+      <button class="slider__dot active" data-index="0"></button>
+      <button class="slider__dot" data-index="1"></button>
+    </div>
   </section>
 
   <!-- ============================================================
@@ -156,6 +170,28 @@
   <script src="/nuvo/frontend/js/main.js"></script>
   <script src="/nuvo/frontend/js/carrito.js"></script>
   <script src="/nuvo/frontend/js/productos.js"></script>
+  <script>
+    (function () {
+      const track = document.getElementById('slider-track');
+      const dots  = document.querySelectorAll('.slider__dot');
+      const total = document.querySelectorAll('.slider__slide').length;
+      let current = 0, timer;
+
+      function goTo(index) {
+        current = (index + total) % total;
+        track.style.transform = `translateX(-${current * 100}%)`;
+        dots.forEach((d, i) => d.classList.toggle('active', i === current));
+      }
+
+      function startAuto() { timer = setInterval(() => goTo(current + 1), 5000); }
+
+      document.getElementById('slider-prev').addEventListener('click', () => { clearInterval(timer); goTo(current - 1); startAuto(); });
+      document.getElementById('slider-next').addEventListener('click', () => { clearInterval(timer); goTo(current + 1); startAuto(); });
+      dots.forEach(d => d.addEventListener('click', () => { clearInterval(timer); goTo(+d.dataset.index); startAuto(); }));
+
+      startAuto();
+    })();
+  </script>
   <script>
     function handleNewsletter(e) {
       e.preventDefault();
