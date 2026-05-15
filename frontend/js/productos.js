@@ -67,7 +67,6 @@ function renderProductos(lista) {
 
   container.innerHTML = lista.map(p => `
     <div class="nuve-card" onclick="abrirModal(${p.id})">
-      <span class="nuve-card__badge">#${p.id}</span>
       <div class="nuve-card__img-wrap">
         <img src="${p.img}" alt="${p.nombre}" loading="lazy">
       </div>
