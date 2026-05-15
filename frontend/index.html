@@ -164,7 +164,7 @@
     if (!section) return;
 
     Object.assign(section.style, {
-      background: '#f5f0eb',
+      background: '#ffffff',
       padding: '4rem 3rem',
       fontFamily: "'Montserrat', sans-serif",
     });
@@ -191,12 +191,7 @@
       marginBottom: '0.4rem',
     });
 
-    const deco = document.createElement('div');
-    deco.innerHTML = '✦';
-    Object.assign(deco.style, { color: '#c8a97e', fontSize: '0.7rem', paddingLeft: '2px' });
-
     titleWrap.appendChild(title);
-    titleWrap.appendChild(deco);
 
     const verTodos = document.createElement('a');
     verTodos.textContent = 'VER TODOS LOS PRODUCTOS';
@@ -266,13 +261,13 @@
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
-        padding: '2rem 1.5rem',
-        height: '240px',
+        height: '300px',
+        overflow: 'hidden',
       });
       const img = document.createElement('img');
       img.src = p.img;
       img.alt = p.nombre;
-      Object.assign(img.style, { maxHeight: '180px', maxWidth: '100%', objectFit: 'contain' });
+      Object.assign(img.style, { width: '100%', height: '100%', objectFit: 'contain' });
 
       imgWrap.appendChild(img);
 
