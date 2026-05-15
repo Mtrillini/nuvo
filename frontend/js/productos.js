@@ -109,23 +109,31 @@ function abrirModal(id) {
   modalProductoActual = p;
   modalQty = 1;
 
-  document.getElementById('modal-img').src       = p.img;
-  document.getElementById('modal-img').alt       = p.nombre;
-  document.getElementById('modal-marca').textContent  = p.marca;
-  document.getElementById('modal-nombre').textContent = p.nombre;
-  document.getElementById('modal-tipo').textContent   = p.tipo;
-  document.getElementById('modal-desc').textContent   = p.descripcion;
-  document.getElementById('modal-precio').textContent = fmt(p.precio);
-  document.getElementById('modal-qty').textContent    = modalQty;
+  document.getElementById('modal-img').src             = p.img;
+  document.getElementById('modal-img').alt             = p.nombre;
+  document.getElementById('modal-marca').textContent   = p.marca;
+  document.getElementById('modal-nombre').textContent  = p.nombre;
+  document.getElementById('modal-tipo').textContent    = p.tipo;
+  document.getElementById('modal-desc').textContent    = p.descripcion;
+  document.getElementById('modal-precio').textContent  = fmt(p.precio);
+  document.getElementById('modal-qty').textContent     = modalQty;
 
   const modal = document.getElementById('producto-modal');
   modal.style.display = 'flex';
   document.body.style.overflow = 'hidden';
+  requestAnimationFrame(() => {
+    modal.querySelector('.prod-modal__box').classList.add('open');
+  });
 }
 
 function cerrarModal() {
-  document.getElementById('producto-modal').style.display = 'none';
-  document.body.style.overflow = '';
+  const modal = document.getElementById('producto-modal');
+  const box   = modal.querySelector('.prod-modal__box');
+  box.classList.remove('open');
+  box.addEventListener('transitionend', () => {
+    modal.style.display = 'none';
+    document.body.style.overflow = '';
+  }, { once: true });
   modalProductoActual = null;
 }
 
