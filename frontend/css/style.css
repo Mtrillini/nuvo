@@ -2166,7 +2166,7 @@ body.page-productos .section {
   /* ---- Más Vendidos ---- */
   .mv-header             { flex-direction: column; gap: 0.5rem; margin-bottom: 1.5rem; }
   .mas-vendidos__section { padding: 2.5rem 1rem; }
-  .mas-vendidos__grid    { grid-template-columns: repeat(2, 1fr); gap: 0.75rem; }
+  .mas-vendidos__grid    { grid-template-columns: 1fr; gap: 0.75rem; }
   .mv-card__img-wrap     { height: 180px; }
 
   /* ---- Productos ---- */
@@ -2221,7 +2221,6 @@ body.page-productos .section {
    ============================================================ */
 @media (max-width: 480px) {
   .hero-slider           { height: 82vh; }
-  .mas-vendidos__grid    { grid-template-columns: 1fr; }
   .mv-card__img-wrap     { height: 220px; }
   .productos-grid-nuve   { grid-template-columns: repeat(2, 1fr); }
   .colecciones-panel     { min-height: 165px; }
