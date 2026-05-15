@@ -292,13 +292,12 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .mobile-menu a {
-  font-family: var(--font-secondary);
-  font-size: 0.78rem;
-  font-weight: 400;
-  letter-spacing: 2px;
-  text-transform: uppercase;
+  font-family: var(--font-primary);
+  font-size: 1.3rem;
+  font-weight: 300;
+  letter-spacing: 0.08em;
   color: #e8d8c7;
-  padding: 0.75rem 0;
+  padding: 0.6rem 0;
   width: 100%;
   border-bottom: 1px solid rgba(255,255,255,0.06);
   transition: color var(--transition);
