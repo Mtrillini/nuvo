@@ -39,7 +39,7 @@ function getNavbarHTML() {
           <i class="fa-regular fa-user"></i>
         </a>
         <a href="/nuvo/frontend/carrito.html" class="navbar__cart" aria-label="Carrito">
-          <img src="/nuvo/frontend/images/icon-cart.png" alt="Carrito" class="navbar__cart-icon" style="mix-blend-mode:screen;">
+          <i class="fa-solid fa-bag-shopping"></i>
           <span class="cart-badge" id="cart-badge" style="display:none;">0</span>
         </a>
         <button class="navbar__hamburger" id="hamburger-btn" aria-label="Menú">
