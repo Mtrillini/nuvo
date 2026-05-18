@@ -18,7 +18,7 @@ function getNavbarHTML() {
 
       <div class="navbar__logo-wrap">
         <a href="/nuvo/frontend/index.html">
-          <img src="/nuvo/frontend/images/logo.png" alt="NÜVE" class="navbar__logo-img">
+          <img src="/nuvo/frontend/images/logo-nuve.png" alt="NÜVE" class="navbar__logo-img">
         </a>
       </div>
 
@@ -63,10 +63,37 @@ function getNavbarHTML() {
 // ---- Footer HTML ----
 function getFooterHTML() {
   return `
+    <section class="esencia">
+      <div class="esencia__title">La esencia de NÜVE</div>
+      <div class="esencia__divider"></div>
+      <div class="esencia__grid">
+        <div class="esencia__item">
+          <div class="esencia__icon"><i class="fa-solid fa-medal"></i></div>
+          <div class="esencia__label">100% Originales</div>
+          <div class="esencia__desc">Garantizamos autenticidad en cada fragancia.</div>
+        </div>
+        <div class="esencia__item">
+          <div class="esencia__icon"><i class="fa-solid fa-bag-shopping"></i></div>
+          <div class="esencia__label">Selección curada</div>
+          <div class="esencia__desc">Las mejores marcas, elegidas para vos.</div>
+        </div>
+        <div class="esencia__item">
+          <div class="esencia__icon"><i class="fa-solid fa-tag"></i></div>
+          <div class="esencia__label">Mejor precio</div>
+          <div class="esencia__desc">Calidad premium, precio inteligente.</div>
+        </div>
+        <div class="esencia__item">
+          <div class="esencia__icon"><i class="fa-solid fa-shield-halved"></i></div>
+          <div class="esencia__label">Confianza</div>
+          <div class="esencia__desc">Compra segura, siempre.</div>
+        </div>
+      </div>
+    </section>
+
     <footer class="footer">
       <div class="footer__top">
         <div>
-          <img src="/nuvo/frontend/images/logo-footer.png" alt="NÜVE" class="footer__logo-img">
+          <img src="/nuvo/frontend/images/logo-nuve.png" alt="NÜVE" class="footer__logo-img">
         </div>
 
         <div>
