@@ -223,6 +223,13 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 /* Cart icon */
+.navbar__cart-icon {
+  width: 26px;
+  height: 26px;
+  object-fit: contain;
+  display: block;
+}
+
 .navbar__cart {
   position: relative;
   display: flex;
