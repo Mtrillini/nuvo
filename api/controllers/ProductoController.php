@@ -11,8 +11,9 @@ class ProductoController {
         $categoria = $_GET['categoria'] ?? null;
         $tipo      = $_GET['tipo']      ?? null;
         $search    = $_GET['search']    ?? null;
+        $destacado = isset($_GET['destacado']) ? (bool)(int)$_GET['destacado'] : null;
 
-        $productos = $this->service->getAll($categoria, $tipo, $search);
+        $productos = $this->service->getAll($categoria, $tipo, $search, $destacado);
         echo json_encode(['success' => true, 'data' => $productos]);
     }
 
@@ -41,9 +42,9 @@ class ProductoController {
             }
         }
 
-        if (!in_array($body['tipo'] ?? 'original', ['original', 'tester'], true)) {
+        if (!in_array($body['tipo'] ?? 'femenino', ['femenino', 'masculino', 'unisex'], true)) {
             http_response_code(400);
-            echo json_encode(['success' => false, 'message' => "Tipo inválido. Debe ser 'original' o 'tester'."]);
+            echo json_encode(['success' => false, 'message' => "Tipo inválido. Debe ser 'femenino', 'masculino' o 'unisex'."]);
             return;
         }
 

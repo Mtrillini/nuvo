@@ -10,8 +10,7 @@ class PedidoService {
     }
 
     public function crear(array $clienteData, array $items): array {
-        // Validate items and compute total
-        $total = 0;
+        $total          = 0;
         $validatedItems = [];
         $productoService = new ProductoService();
 
@@ -27,8 +26,10 @@ class PedidoService {
             if (!$producto) {
                 throw new RuntimeException("Producto #{$id} no encontrado.");
             }
-            if ((int)$producto['stock'] < $cantidad) {
-                throw new RuntimeException("Stock insuficiente para \"{$producto['nombre']}\".");
+
+            $disponible = $this->stockService->getDisponible($id);
+            if ($disponible < $cantidad) {
+                throw new RuntimeException("Stock insuficiente para \"{$producto['nombre']}\". Disponible: {$disponible}.");
             }
 
             $precio = (float)$producto['precio'];
@@ -42,10 +43,8 @@ class PedidoService {
             ];
         }
 
-        // Begin transaction
         $this->db->beginTransaction();
         try {
-            // Insert pedido
             $stmt = $this->db->prepare(
                 "INSERT INTO pedidos (cliente_nombre, cliente_email, cliente_telefono, cliente_direccion, total, estado)
                  VALUES (:nombre, :email, :telefono, :direccion, :total, 'pendiente')"
@@ -54,28 +53,30 @@ class PedidoService {
                 ':nombre'    => $clienteData['nombre'],
                 ':email'     => $clienteData['email'],
                 ':telefono'  => $clienteData['telefono']  ?? null,
-                ':direccion' => $clienteData['direccion']  ?? null,
+                ':direccion' => $clienteData['direccion'] ?? null,
                 ':total'     => $total,
             ]);
             $pedidoId = (int)$this->db->lastInsertId();
 
-            // Insert items & decrement stock
             $stmtItem = $this->db->prepare(
                 "INSERT INTO pedido_items (pedido_id, producto_id, cantidad, precio_unitario)
                  VALUES (:pedido_id, :producto_id, :cantidad, :precio_unitario)"
             );
             foreach ($validatedItems as $item) {
                 $stmtItem->execute([
-                    ':pedido_id'      => $pedidoId,
-                    ':producto_id'    => $item['producto_id'],
-                    ':cantidad'       => $item['cantidad'],
-                    ':precio_unitario'=> $item['precio_unitario'],
+                    ':pedido_id'       => $pedidoId,
+                    ':producto_id'     => $item['producto_id'],
+                    ':cantidad'        => $item['cantidad'],
+                    ':precio_unitario' => $item['precio_unitario'],
                 ]);
-                $this->stockService->decrementar($item['producto_id'], $item['cantidad']);
+                $this->stockService->reservar($item['producto_id'], $item['cantidad']);
             }
 
             $this->db->commit();
-            return $this->getById($pedidoId);
+
+            $pedido = $this->getById($pedidoId);
+            MailService::enviarPedidoCreado($pedido);
+            return $pedido;
 
         } catch (Throwable $e) {
             $this->db->rollBack();
@@ -84,8 +85,7 @@ class PedidoService {
     }
 
     public function getAll(?string $estado = null): array {
-        $sql = "SELECT p.*,
-                       COUNT(pi.id) AS total_items
+        $sql = "SELECT p.*, COUNT(pi.id) AS total_items
                 FROM pedidos p
                 LEFT JOIN pedido_items pi ON pi.pedido_id = p.id";
         $params = [];
@@ -108,7 +108,6 @@ class PedidoService {
         $pedido = $stmt->fetch();
         if (!$pedido) return null;
 
-        // Fetch items with product info
         $stmtItems = $this->db->prepare(
             "SELECT pi.*, pr.nombre AS producto_nombre, pr.imagen_url AS producto_imagen
              FROM pedido_items pi
@@ -127,10 +126,42 @@ class PedidoService {
             throw new InvalidArgumentException("Estado inválido: {$estado}");
         }
 
-        $stmt = $this->db->prepare("UPDATE pedidos SET estado = :estado WHERE id = :id");
-        $stmt->execute([':estado' => $estado, ':id' => $id]);
+        $pedido = $this->getById($id);
+        if (!$pedido) {
+            throw new RuntimeException("Pedido #{$id} no encontrado.");
+        }
 
-        return $this->getById($id);
+        $this->db->beginTransaction();
+        try {
+            $stmt = $this->db->prepare("UPDATE pedidos SET estado = :estado WHERE id = :id");
+            $stmt->execute([':estado' => $estado, ':id' => $id]);
+
+            if ($estado === 'aprobado') {
+                foreach ($pedido['items'] as $item) {
+                    $this->stockService->confirmar((int)$item['producto_id'], (int)$item['cantidad']);
+                }
+            } elseif (in_array($estado, ['rechazado', 'cancelado'], true) && $pedido['estado'] === 'pendiente') {
+                foreach ($pedido['items'] as $item) {
+                    $this->stockService->liberarReserva((int)$item['producto_id'], (int)$item['cantidad']);
+                }
+            }
+
+            $this->db->commit();
+
+            $pedidoActualizado = $this->getById($id);
+
+            if ($estado === 'aprobado') {
+                MailService::enviarPedidoAprobado($pedidoActualizado);
+            } elseif ($estado === 'rechazado') {
+                MailService::enviarPedidoRechazado($pedidoActualizado);
+            }
+
+            return $pedidoActualizado;
+
+        } catch (Throwable $e) {
+            $this->db->rollBack();
+            throw $e;
+        }
     }
 
     public function cancelar(int $id): ?array {
@@ -144,11 +175,11 @@ class PedidoService {
 
         $this->db->beginTransaction();
         try {
-            // Restore stock
-            foreach ($pedido['items'] as $item) {
-                $this->stockService->incrementar((int)$item['producto_id'], (int)$item['cantidad']);
+            if ($pedido['estado'] === 'pendiente') {
+                foreach ($pedido['items'] as $item) {
+                    $this->stockService->liberarReserva((int)$item['producto_id'], (int)$item['cantidad']);
+                }
             }
-            // Update status
             $stmt = $this->db->prepare("UPDATE pedidos SET estado = 'cancelado' WHERE id = :id");
             $stmt->execute([':id' => $id]);
 

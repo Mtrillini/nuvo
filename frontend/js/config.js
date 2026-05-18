@@ -1,1 +1,1 @@
-const API_URL = 'http://localhost/nuve-ecommerce/api/index.php';
+const API_URL = 'http://localhost/nuvo/api/index.php';

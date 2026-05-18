@@ -161,16 +161,20 @@ function renderCarrito() {
   if (summaryContainer) renderSummary(carrito);
 }
 
+function getEnvioGuardado() {
+  try { return JSON.parse(localStorage.getItem('nuve_envio')) || null; } catch { return null; }
+}
+
 function renderSummary(carrito) {
   const container = document.getElementById('cart-summary');
   if (!container) return;
 
   const subtotal = getTotal();
-  const envio = subtotal > 0 ? 0 : 0; // free shipping
-  const total = subtotal + envio;
-  const fmt = window.formatMoney || (v => '$' + v);
-
-  const isEmpty = !carrito || carrito.items.length === 0;
+  const fmt      = window.formatMoney || (v => '$' + v);
+  const isEmpty  = !carrito || carrito.items.length === 0;
+  const envio    = getEnvioGuardado();
+  const envioTotal = envio ? parseFloat(envio.precio) : 0;
+  const total    = subtotal + envioTotal;
 
   container.innerHTML = `
     <div class="order-summary">
@@ -179,13 +183,34 @@ function renderSummary(carrito) {
         <span>Subtotal</span>
         <span>${fmt(subtotal)}</span>
       </div>
-      <div class="order-summary__row">
-        <span>Envío</span>
-        <span>${subtotal > 0 ? 'A calcular' : '—'}</span>
+      <div class="order-summary__divider"></div>
+
+      <div style="margin-bottom:0.8rem;">
+        <div class="order-summary__row" style="margin-bottom:0.4rem;">
+          <span>Envío</span>
+          <span>${envio ? fmt(envioTotal) : '—'}</span>
+        </div>
+        ${envio ? `<div style="font-size:0.7rem;color:#888;margin-bottom:0.5rem;">${envio.descripcion} (CP ${envio.cp})</div>` : ''}
+        <div style="display:flex;gap:0.5rem;align-items:center;">
+          <input
+            type="text"
+            id="cp-envio-input"
+            placeholder="Tu código postal"
+            maxlength="8"
+            value="${envio ? envio.cp : ''}"
+            style="flex:1;padding:0.45rem 0.6rem;border:1px solid #d6c6ad;border-radius:3px;font-family:inherit;font-size:0.75rem;outline:none;"
+          >
+          <button
+            onclick="calcularEnvioCarrito()"
+            style="padding:0.45rem 0.8rem;background:#1a1a1a;color:#e8d8c7;border:none;border-radius:3px;font-family:inherit;font-size:0.72rem;font-weight:600;letter-spacing:1px;cursor:pointer;white-space:nowrap;"
+          >Calcular</button>
+        </div>
+        <div id="envio-msg" style="font-size:0.72rem;color:#888;margin-top:0.3rem;min-height:1rem;"></div>
       </div>
+
       <div class="order-summary__divider"></div>
       <div class="order-summary__row order-summary__row--total">
-        <span>Total estimado</span>
+        <span>${envio ? 'Total' : 'Total estimado'}</span>
         <span>${fmt(total)}</span>
       </div>
       <div class="order-summary__actions">
@@ -200,7 +225,43 @@ function renderSummary(carrito) {
       </div>
     </div>
   `;
+
+  // Allow Enter key in CP input
+  const cpInput = document.getElementById('cp-envio-input');
+  if (cpInput) cpInput.addEventListener('keydown', e => { if (e.key === 'Enter') calcularEnvioCarrito(); });
 }
+
+async function calcularEnvioCarrito() {
+  const cp  = (document.getElementById('cp-envio-input')?.value || '').trim();
+  const msg = document.getElementById('envio-msg');
+
+  if (!cp || !/^\d{4,}$/.test(cp)) {
+    if (msg) msg.textContent = 'Ingresá un código postal válido (mínimo 4 dígitos).';
+    return;
+  }
+
+  if (msg) msg.textContent = 'Calculando...';
+
+  try {
+    const res  = await fetch(API_URL + '/envios/calcular?cp=' + encodeURIComponent(cp));
+    const json = await res.json();
+
+    if (!json.success || !json.data) {
+      localStorage.removeItem('nuve_envio');
+      if (msg) msg.textContent = 'No hay tarifas para ese código postal.';
+      renderSummary(getCarrito());
+      return;
+    }
+
+    const tarifa = json.data;
+    localStorage.setItem('nuve_envio', JSON.stringify({ cp, precio: tarifa.precio, descripcion: tarifa.descripcion }));
+    renderSummary(getCarrito());
+    if (window.showToast) showToast(`Envío: ${(window.formatMoney || (v => '$' + v))(tarifa.precio)}`, 'success');
+  } catch {
+    if (msg) msg.textContent = 'Error al calcular el envío.';
+  }
+}
+window.calcularEnvioCarrito = calcularEnvioCarrito;
 
 // ---- Event handlers ----
 function handleQtyChange(id, delta) {

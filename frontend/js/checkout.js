@@ -2,13 +2,31 @@
 // NÜVE — checkout.js
 // ============================================================
 
+// ---- Envío helpers ----
+function getEnvioGuardado() {
+  try { return JSON.parse(localStorage.getItem('nuve_envio')) || null; } catch { return null; }
+}
+
+async function calcularEnvioCheckout(cp) {
+  try {
+    const res  = await fetch(API_URL + '/envios/calcular?cp=' + encodeURIComponent(cp));
+    const json = await res.json();
+    if (json.success && json.data) {
+      localStorage.setItem('nuve_envio', JSON.stringify({ cp, precio: json.data.precio, descripcion: json.data.descripcion }));
+    } else {
+      localStorage.removeItem('nuve_envio');
+    }
+    renderCheckoutSummary();
+  } catch { /* silently fail */ }
+}
+
 // ---- Render order summary in checkout ----
 function renderCheckoutSummary() {
   const container = document.getElementById('checkout-summary');
   if (!container) return;
 
   const carrito = window.Carrito ? window.Carrito.get() : { items: [] };
-  const fmt = window.formatMoney || (v => '$' + v);
+  const fmt     = window.formatMoney || (v => '$' + v);
 
   if (!carrito.items || carrito.items.length === 0) {
     container.innerHTML = `
@@ -20,7 +38,11 @@ function renderCheckoutSummary() {
     return;
   }
 
-  const subtotal = window.Carrito.getTotal();
+  const subtotal   = window.Carrito.getTotal();
+  const envio      = getEnvioGuardado();
+  const envioTotal = envio ? parseFloat(envio.precio) : 0;
+  const total      = subtotal + envioTotal;
+
   const itemsHTML = carrito.items.map(item => `
     <div class="order-summary__row">
       <span class="order-summary__item-name">${item.nombre} <span class="order-summary__item-qty">x${item.cantidad}</span></span>
@@ -35,12 +57,13 @@ function renderCheckoutSummary() {
       <div class="order-summary__divider"></div>
       <div class="order-summary__row">
         <span>Envío</span>
-        <span>A calcular</span>
+        <span>${envio ? fmt(envioTotal) : 'Completá el CP'}</span>
       </div>
+      ${envio ? `<div style="font-size:0.7rem;color:#888;margin-bottom:0.4rem;">${envio.descripcion} (CP ${envio.cp})</div>` : ''}
       <div class="order-summary__divider"></div>
       <div class="order-summary__row order-summary__row--total">
-        <span>Total estimado</span>
-        <span>${fmt(subtotal)}</span>
+        <span>${envio ? 'Total' : 'Total estimado'}</span>
+        <span>${fmt(total)}</span>
       </div>
     </div>
   `;
@@ -190,9 +213,14 @@ document.addEventListener('DOMContentLoaded', () => {
 
   const form = document.getElementById('checkout-form');
   if (form) {
-    // Real-time validation
     form.querySelectorAll('input').forEach(input => {
-      input.addEventListener('blur', () => validateField(input));
+      input.addEventListener('blur', () => {
+        validateField(input);
+        // Auto-calcular envío cuando el cliente completa el CP
+        if (input.id === 'cp' && /^\d{4,}$/.test(input.value.trim())) {
+          calcularEnvioCheckout(input.value.trim());
+        }
+      });
     });
     form.addEventListener('submit', submitCheckout);
   }

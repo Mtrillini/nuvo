@@ -7,7 +7,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="/nuve-ecommerce/admin/css/admin.css">
+  <link rel="stylesheet" href="/nuvo/admin/css/admin.css">
 </head>
 <body>
 
@@ -20,18 +20,21 @@
 
     <nav class="sidebar__nav">
       <div class="sidebar__nav-label">Principal</div>
-      <a href="/nuve-ecommerce/admin/dashboard.html" class="sidebar__link">
+      <a href="/nuvo/admin/dashboard.html" class="sidebar__link">
         <span class="sidebar__link-icon">◈</span> Dashboard
       </a>
-      <a href="/nuve-ecommerce/admin/productos.html" class="sidebar__link active">
+      <a href="/nuvo/admin/productos.html" class="sidebar__link active">
         <span class="sidebar__link-icon">◆</span> Productos
       </a>
-      <a href="/nuve-ecommerce/admin/pedidos.html" class="sidebar__link">
+      <a href="/nuvo/admin/pedidos.html" class="sidebar__link">
         <span class="sidebar__link-icon">◇</span> Pedidos
       </a>
 
+      <a href="/nuvo/admin/envios.html" class="sidebar__link">
+        <span class="sidebar__link-icon">◎</span> Envíos
+      </a>
       <div class="sidebar__nav-label" style="margin-top:1.5rem;">Tienda</div>
-      <a href="/nuve-ecommerce/frontend/index.html" target="_blank" class="sidebar__link">
+      <a href="/nuvo/frontend/index.html" target="_blank" class="sidebar__link">
         <span class="sidebar__link-icon">↗</span> Ver tienda
       </a>
     </nav>
@@ -105,24 +108,29 @@
         <form id="producto-form" onsubmit="event.preventDefault();">
 
           <div class="form-grid-2">
-            <div class="form-group" style="grid-column:1/-1;">
-              <label class="form-label" for="f-nombre">Nombre *</label>
-              <input type="text" id="f-nombre" class="form-input" required placeholder="Noir Absolu">
+            <div class="form-group">
+              <label class="form-label" for="f-marca">Marca *</label>
+              <input type="text" id="f-marca" class="form-input" required placeholder="Carolina Herrera">
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="f-nombre">Nombre del perfume *</label>
+              <input type="text" id="f-nombre" class="form-input" required placeholder="Good Girl">
             </div>
 
             <div class="form-group">
               <label class="form-label" for="f-categoria">Categoría *</label>
               <select id="f-categoria" class="form-select">
-                <option value="1">Originales</option>
-                <option value="2">Testers</option>
+                <option value="1">Perfumes</option>
               </select>
             </div>
 
             <div class="form-group">
               <label class="form-label" for="f-tipo">Tipo *</label>
               <select id="f-tipo" class="form-select">
-                <option value="original">Original</option>
-                <option value="tester">Tester</option>
+                <option value="femenino">Femenino</option>
+                <option value="masculino">Masculino</option>
+                <option value="unisex">Unisex</option>
               </select>
             </div>
 
@@ -137,8 +145,12 @@
             </div>
 
             <div class="form-group" style="grid-column:1/-1;">
-              <label class="form-label" for="f-imagen">URL de imagen</label>
-              <input type="url" id="f-imagen" class="form-input" placeholder="https://...">
+              <label class="form-label">Imágenes del producto</label>
+              <div id="f-imagenes-lista" style="display:flex;flex-wrap:wrap;gap:0.6rem;margin-bottom:0.8rem;"></div>
+              <label style="display:inline-flex;align-items:center;gap:0.5rem;cursor:pointer;padding:0.5rem 1rem;border:1px solid var(--champagne);border-radius:var(--radius);font-size:0.75rem;font-family:var(--font);color:var(--negro);background:transparent;transition:background var(--transition);" onmouseover="this.style.background='var(--crema)'" onmouseout="this.style.background='transparent'">
+                + Agregar fotos
+                <input type="file" id="f-imagen-file" multiple accept="image/jpeg,image/png,image/webp,image/gif" style="display:none;">
+              </label>
             </div>
 
             <div class="form-group" style="grid-column:1/-1;">
@@ -149,6 +161,11 @@
             <div class="form-group" style="grid-column:1/-1;">
               <label class="form-label" for="f-descripcion">Descripción</label>
               <textarea id="f-descripcion" class="form-textarea" rows="4" placeholder="Descripción del producto..."></textarea>
+            </div>
+
+            <div class="form-group" style="display:flex;flex-direction:row;align-items:center;gap:0.5rem;grid-column:1/-1;">
+              <input type="checkbox" id="f-destacado" style="width:16px;height:16px;accent-color:var(--negro);">
+              <label class="form-label" for="f-destacado" style="margin:0;">Destacar en "Más Vendidos"</label>
             </div>
 
             <div class="form-group" style="display:flex;flex-direction:row;align-items:center;gap:0.5rem;grid-column:1/-1;">
@@ -166,8 +183,8 @@
     </div>
   </div>
 
-  <script src="/nuve-ecommerce/admin/js/config.js"></script>
-  <script src="/nuve-ecommerce/admin/js/auth.js"></script>
-  <script src="/nuve-ecommerce/admin/js/productos.js"></script>
+  <script src="/nuvo/admin/js/config.js"></script>
+  <script src="/nuvo/admin/js/auth.js"></script>
+  <script src="/nuvo/admin/js/productos.js"></script>
 </body>
 </html>

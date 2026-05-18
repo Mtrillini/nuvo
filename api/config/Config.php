@@ -32,8 +32,16 @@ if (!defined('DB_USER'))            define('DB_USER',            'root');
 if (!defined('DB_PASS'))            define('DB_PASS',            '');
 if (!defined('MP_ACCESS_TOKEN'))    define('MP_ACCESS_TOKEN',    '');
 if (!defined('MP_PUBLIC_KEY'))      define('MP_PUBLIC_KEY',      '');
-if (!defined('APP_URL'))            define('APP_URL',            'http://localhost/nuve-ecommerce');
+if (!defined('APP_URL'))            define('APP_URL',            'http://localhost/nuvo');
 if (!defined('SESSION_SECRET'))     define('SESSION_SECRET',     'nuve_secret_2024');
 
 // CORS allowed origins (comma-separated in .env, or wildcard)
 if (!defined('CORS_ORIGIN'))        define('CORS_ORIGIN',        '*');
+
+// Mail
+if (!defined('MAIL_FROM'))          define('MAIL_FROM',          'noreply@nuve.com');
+if (!defined('MAIL_FROM_NAME'))     define('MAIL_FROM_NAME',     'NÜVE Perfumería');
+if (!defined('MAIL_SMTP_HOST'))     define('MAIL_SMTP_HOST',     '');
+if (!defined('MAIL_SMTP_PORT'))     define('MAIL_SMTP_PORT',     '587');
+if (!defined('MAIL_SMTP_USER'))     define('MAIL_SMTP_USER',     '');
+if (!defined('MAIL_SMTP_PASS'))     define('MAIL_SMTP_PASS',     '');

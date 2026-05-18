@@ -28,6 +28,7 @@ require_once __DIR__ . '/config/Config.php';
 require_once __DIR__ . '/config/Database.php';
 require_once __DIR__ . '/middleware/Auth.php';
 require_once __DIR__ . '/services/StockService.php';
+require_once __DIR__ . '/services/MailService.php';
 require_once __DIR__ . '/services/ProductoService.php';
 require_once __DIR__ . '/services/PedidoService.php';
 require_once __DIR__ . '/services/MercadoPagoService.php';
@@ -159,6 +160,43 @@ if ($seg0 === 'mp') {
     } else {
         http_response_code(404);
         echo json_encode(['success' => false, 'message' => 'Ruta no encontrada.']);
+    }
+    exit;
+}
+
+// --- ENVIOS ---
+if ($seg0 === 'envios') {
+    require_once __DIR__ . '/services/EnvioService.php';
+    require_once __DIR__ . '/controllers/EnvioController.php';
+    $ctrl = new EnvioController();
+
+    if ($seg1 === 'calcular') {
+        $ctrl->calcular();
+    } elseif ($seg1 === '' || $seg1 === null) {
+        if ($method === 'GET')       $ctrl->index();
+        elseif ($method === 'POST')  $ctrl->store();
+        else { http_response_code(405); echo json_encode(['success' => false, 'message' => 'Método no permitido.']); }
+    } elseif (is_numeric($seg1)) {
+        $id = (int)$seg1;
+        if ($method === 'PUT')         $ctrl->update($id);
+        elseif ($method === 'DELETE')  $ctrl->destroy($id);
+        else { http_response_code(405); echo json_encode(['success' => false, 'message' => 'Método no permitido.']); }
+    } else {
+        http_response_code(404);
+        echo json_encode(['success' => false, 'message' => 'Ruta no encontrada.']);
+    }
+    exit;
+}
+
+// --- UPLOAD ---
+if ($seg0 === 'upload') {
+    require_once __DIR__ . '/controllers/UploadController.php';
+    $ctrl = new UploadController();
+    if ($method === 'POST') {
+        $ctrl->upload();
+    } else {
+        http_response_code(405);
+        echo json_encode(['success' => false, 'message' => 'Método no permitido.']);
     }
     exit;
 }
