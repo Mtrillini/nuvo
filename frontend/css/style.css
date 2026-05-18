@@ -832,25 +832,25 @@ h1, h2, h3, h4, h5, h6 {
    ============================================================ */
 .newsletter {
   background-color: #ffffff;
-  padding: 5rem 2rem;
+  padding: 2.5rem 2rem;
   text-align: center;
 }
 
 .newsletter__title {
   font-family: var(--font-primary);
-  font-size: 2.2rem;
+  font-size: 1.3rem;
   font-weight: 300;
   color: var(--negro);
-  margin-bottom: 0.5rem;
+  margin-bottom: 0.3rem;
 }
 
 .newsletter__subtitle {
   font-family: var(--font-secondary);
-  font-size: 0.8rem;
+  font-size: 0.72rem;
   font-weight: 300;
   color: var(--negro);
   opacity: 0.7;
-  margin-bottom: 2rem;
+  margin-bottom: 1.25rem;
   letter-spacing: 0.1em;
 }
 
@@ -2214,8 +2214,8 @@ body.page-productos .section {
   .form-group--full      { grid-column: 1; }
 
   /* ---- Newsletter ---- */
-  .newsletter            { padding: 3rem 1.25rem; }
-  .newsletter__title     { font-size: 1.6rem; }
+  .newsletter            { padding: 1.75rem 1.25rem; }
+  .newsletter__title     { font-size: 1.1rem; }
   .newsletter__form      { flex-direction: column; }
   .newsletter__input     { border-right: 1px solid var(--negro); }
 
