@@ -454,7 +454,7 @@ h1, h2, h3, h4, h5, h6 {
   flex: 1;
   display: flex;
   align-items: flex-end;
-  padding: 3.5rem 4rem;
+  padding: 2rem 4rem;
   text-decoration: none;
   position: relative;
   overflow: hidden;
@@ -2341,7 +2341,7 @@ body.page-productos .section {
    MÁS VENDIDOS (homepage)
    ============================================================ */
 .mas-vendidos__section {
-  background: linear-gradient(to bottom, #ffffff, #1a1a1a);
+  background: #ffffff;
   padding: 4rem 3rem;
 }
 
