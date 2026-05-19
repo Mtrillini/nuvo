@@ -2654,7 +2654,7 @@ body.page-productos .section {
 .prod-modal__close:hover { color: #1a1a1a; }
 
 .prod-modal__img-wrap {
-  background: #f9f6f2;
+  background: #ffffff;
   display: flex;
   align-items: center;
   justify-content: center;
