@@ -184,7 +184,7 @@ async function submitCheckout(e) {
       const pedidoId = json.data?.pedido?.id;
       showToast('Pedido creado correctamente.', 'success');
       setTimeout(() => {
-        window.location.href = `/nuvo/frontend/checkout-resultado.html?status=pending&pedido_id=${pedidoId}`;
+        window.location.href = `${PAGES_BASE}/checkout-resultado?status=pending&pedido_id=${pedidoId}`;
       }, 1200);
     }
 
@@ -231,7 +231,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (!carrito.items || carrito.items.length === 0) {
       if (document.getElementById('checkout-form')) {
         showToast('Tu carrito está vacío.', 'info');
-        setTimeout(() => { window.location.href = '/nuvo/frontend/carrito.html'; }, 1500);
+        setTimeout(() => { window.location.href = PAGES_BASE + '/carrito'; }, 1500);
       }
     }
   }, 500);

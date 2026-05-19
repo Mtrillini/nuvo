@@ -56,7 +56,7 @@ function renderProductos(lista) {
   container.innerHTML = lista.map(p => `
     <div class="nuve-card" onclick="abrirModal(${p.id})">
       <div class="nuve-card__img-wrap">
-        <img src="${p.img || '/nuvo/frontend/images/logo.png'}" alt="${p.nombre}" loading="lazy">
+        <img src="${p.img || '${APP_BASE}/frontend/images/logo-nuve.png'}" alt="${p.nombre}" loading="lazy">
       </div>
       <div class="nuve-card__body">
         <div class="nuve-card__nombre">${p.nombre}</div>
@@ -249,7 +249,7 @@ function renderMasVendidos(section, lista) {
     const imgWrap     = document.createElement('div');
     imgWrap.className  = 'mv-card__img-wrap';
     const img          = document.createElement('img');
-    img.src   = p.img || '/nuvo/frontend/images/logo.png';
+    img.src   = p.img || '${APP_BASE}/frontend/images/logo-nuve.png';
     img.alt   = p.nombre;
     Object.assign(img.style, { width: '100%', height: '100%', objectFit: 'contain' });
     imgWrap.appendChild(img);

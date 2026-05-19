@@ -121,7 +121,7 @@ function renderCarrito() {
       <div class="cart-empty">
         <div class="cart-empty__title">Tu carrito está vacío</div>
         <p class="cart-empty__text">Explorá nuestra colección y encontrá tu fragancia.</p>
-        <a href="/nuvo/frontend/productos.html" class="cart-empty__btn">VER PERFUMES</a>
+        <a href="${PAGES_BASE}/productos" class="cart-empty__btn">VER PERFUMES</a>
       </div>
     `;
     if (summaryContainer) renderSummary(carrito);
@@ -214,11 +214,11 @@ function renderSummary(carrito) {
         <span>${fmt(total)}</span>
       </div>
       <div class="order-summary__actions">
-        <a href="/nuvo/frontend/checkout.html"
+        <a href="${PAGES_BASE}/checkout"
            class="order-summary__btn-primary${isEmpty ? ' disabled' : ''}">
           PROCEDER AL PAGO
         </a>
-        <a href="/nuvo/frontend/productos.html" class="order-summary__btn-secondary">
+        <a href="${PAGES_BASE}/productos" class="order-summary__btn-secondary">
           SEGUIR COMPRANDO
         </a>
         ${!isEmpty ? `<button onclick="handleVaciar()" class="order-summary__btn-vaciar">Vaciar carrito</button>` : ''}
