@@ -2157,7 +2157,8 @@ body.page-productos .section {
 @media (max-width: 768px) {
   /* ---- Navbar ---- */
   .navbar                { height: 60px; padding: 0 1rem; }
-  .navbar__logo-img      { height: 40px; }
+  .navbar__logo-img      { height: 52px; }
+  .navbar__cart          { font-size: 16px; }
   .navbar__nav           { display: none; }
   .navbar__icon-link     { display: none; }
   .navbar__hamburger     { display: flex; }
