@@ -1,4 +1,4 @@
-// ============================================================
+﻿// ============================================================
 // NÜVE — main.js
 // ============================================================
 
@@ -17,28 +17,28 @@ function getNavbarHTML() {
     <header class="navbar" id="main-navbar">
 
       <div class="navbar__logo-wrap">
-        <a href="/nuvo/frontend/index.html">
-          <img src="/nuvo/frontend/images/logo-nuve.png" alt="NÜVE" class="navbar__logo-img">
+        <a href="${APP_BASE}/frontend/index.html">
+          <img src="${APP_BASE}/frontend/images/logo-nuve.png" alt="NÜVE" class="navbar__logo-img">
         </a>
       </div>
 
       <nav class="navbar__nav">
-        <a href="/nuvo/frontend/index.html" class="navbar__link" data-page="index">INICIO</a>
+        <a href="${APP_BASE}/frontend/index.html" class="navbar__link" data-page="index">INICIO</a>
         <div class="navbar__dropdown">
-          <a href="/nuvo/frontend/productos.html" class="navbar__link" data-page="productos">PERFUMES</a>
+          <a href="${APP_BASE}/frontend/productos.html" class="navbar__link" data-page="productos">PERFUMES</a>
           <div class="navbar__dropdown-menu">
-            <a href="/nuvo/frontend/productos.html?genero=femenino" class="navbar__dropdown-item">FEMENINOS</a>
-            <a href="/nuvo/frontend/productos.html?genero=masculino" class="navbar__dropdown-item">MASCULINOS</a>
+            <a href="${APP_BASE}/frontend/productos.html?genero=femenino" class="navbar__dropdown-item">FEMENINOS</a>
+            <a href="${APP_BASE}/frontend/productos.html?genero=masculino" class="navbar__dropdown-item">MASCULINOS</a>
           </div>
         </div>
-        <a href="/nuvo/frontend/nosotros.html" class="navbar__link" data-page="nosotros">SOBRE NÜVE</a>
+        <a href="${APP_BASE}/frontend/nosotros.html" class="navbar__link" data-page="nosotros">SOBRE NÜVE</a>
       </nav>
 
       <div class="navbar__icons">
         <a href="#" class="navbar__icon-link">
           <i class="fa-regular fa-user"></i>
         </a>
-        <a href="/nuvo/frontend/carrito.html" class="navbar__cart" aria-label="Carrito">
+        <a href="${APP_BASE}/frontend/carrito.html" class="navbar__cart" aria-label="Carrito">
           <i class="fa-solid fa-bag-shopping"></i>
           <span class="cart-badge" id="cart-badge" style="display:none;">0</span>
         </a>
@@ -50,12 +50,12 @@ function getNavbarHTML() {
     </header>
 
     <div class="mobile-menu" id="mobile-menu">
-      <a href="/nuvo/frontend/index.html">Inicio</a>
-      <a href="/nuvo/frontend/productos.html">Perfumes</a>
-      <a href="/nuvo/frontend/productos.html?genero=femenino">Perfumes Femeninos</a>
-      <a href="/nuvo/frontend/productos.html?genero=masculino">Perfumes Masculinos</a>
-      <a href="/nuvo/frontend/nosotros.html">Sobre NÜVE</a>
-      <a href="/nuvo/frontend/carrito.html">Carrito</a>
+      <a href="${APP_BASE}/frontend/index.html">Inicio</a>
+      <a href="${APP_BASE}/frontend/productos.html">Perfumes</a>
+      <a href="${APP_BASE}/frontend/productos.html?genero=femenino">Perfumes Femeninos</a>
+      <a href="${APP_BASE}/frontend/productos.html?genero=masculino">Perfumes Masculinos</a>
+      <a href="${APP_BASE}/frontend/nosotros.html">Sobre NÜVE</a>
+      <a href="${APP_BASE}/frontend/carrito.html">Carrito</a>
     </div>
   `;
 }
@@ -93,16 +93,16 @@ function getFooterHTML() {
     <footer class="footer">
       <div class="footer__top">
         <div>
-          <img src="/nuvo/frontend/images/logo-nuve.png" alt="NÜVE" class="footer__logo-img">
+          <img src="${APP_BASE}/frontend/images/logo-nuve.png" alt="NÜVE" class="footer__logo-img">
         </div>
 
         <div>
           <div class="footer__heading">Navegación</div>
           <nav class="footer__nav">
-            <a href="/nuvo/frontend/index.html">Inicio</a>
-            <a href="/nuvo/frontend/productos.html">Perfumes</a>
-            <a href="/nuvo/frontend/nosotros.html">Nosotros</a>
-            <a href="/nuvo/frontend/contacto.html">Contacto</a>
+            <a href="${APP_BASE}/frontend/index.html">Inicio</a>
+            <a href="${APP_BASE}/frontend/productos.html">Perfumes</a>
+            <a href="${APP_BASE}/frontend/nosotros.html">Nosotros</a>
+            <a href="${APP_BASE}/frontend/contacto.html">Contacto</a>
           </nav>
         </div>
 

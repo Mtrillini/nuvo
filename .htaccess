@@ -1,0 +1,8 @@
+Options -Indexes
+
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+
+  # Redirect root to frontend
+  RewriteRule ^$ frontend/index.html [L,R=302]
+</IfModule>
