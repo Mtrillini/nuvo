@@ -2389,7 +2389,7 @@ body.page-productos .section {
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 300px;
+  height: 220px;
   overflow: hidden;
 }
 
@@ -2405,7 +2405,7 @@ body.page-productos .section {
 .productos-grid-nuve {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  gap: 1.5rem;
+  gap: 1rem;
   max-width: 1200px;
   margin: 0 auto;
 }
@@ -2446,7 +2446,7 @@ body.page-productos .section {
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 280px;
+  height: 210px;
   overflow: hidden;
 }
 
@@ -2457,7 +2457,7 @@ body.page-productos .section {
 }
 
 .nuve-card__body {
-  padding: 1.2rem 1.2rem 1.4rem;
+  padding: 0.9rem 0.9rem 1rem;
   display: flex;
   flex-direction: column;
   gap: 2px;
@@ -2465,7 +2465,7 @@ body.page-productos .section {
 
 .nuve-card__nombre {
   font-family: 'Garet', 'Nunito', sans-serif;
-  font-size: 1rem;
+  font-size: 0.88rem;
   font-weight: 400;
   color: #1a1a1a;
   letter-spacing: 0.5px;
@@ -2473,35 +2473,35 @@ body.page-productos .section {
 
 .nuve-card__marca {
   font-family: var(--font-secondary);
-  font-size: 0.68rem;
+  font-size: 0.62rem;
   color: #c8a97e;
   letter-spacing: 1px;
 }
 
 .nuve-card__tipo {
   font-family: var(--font-secondary);
-  font-size: 0.65rem;
+  font-size: 0.6rem;
   color: #aaa;
   letter-spacing: 0.5px;
-  margin-bottom: 0.4rem;
+  margin-bottom: 0.3rem;
 }
 
 .nuve-card__precio {
   font-family: var(--font-secondary);
-  font-size: 1rem;
+  font-size: 0.9rem;
   font-weight: 600;
   color: #1a1a1a;
-  margin-bottom: 0.8rem;
+  margin-bottom: 0.6rem;
 }
 
 .nuve-card__btn {
   width: 100%;
-  padding: 0.75rem;
+  padding: 0.6rem;
   background: #1a1a1a;
   color: #e8d8c7;
   border: none;
   font-family: var(--font-secondary);
-  font-size: 0.65rem;
+  font-size: 0.6rem;
   font-weight: 600;
   letter-spacing: 2.5px;
   cursor: pointer;
