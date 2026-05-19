@@ -64,7 +64,7 @@
         const res  = await fetch(API_URL + '/auth/check', { credentials: 'include' });
         const json = await res.json();
         if (json.success && json.authenticated) {
-          window.location.href = '/nuvo/admin/dashboard.html';
+          window.location.href = PAGES_BASE + '/admin/dashboard.html';
         }
       } catch { /* not logged in */ }
     })();
