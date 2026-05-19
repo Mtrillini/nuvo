@@ -9,6 +9,9 @@ DirectoryIndex frontend/index.html
   RewriteCond %{REQUEST_FILENAME} -d
   RewriteRule ^ - [L]
 
+  # Redirigir URLs con .html a URL limpia (preserva query string)
+  RewriteRule ^([a-z][a-z0-9-]*)\.html$ /$1 [R=301,L,QSA]
+
   # Recursos estáticos del frontend
   RewriteRule ^(css|js|images)/(.*)$ frontend/$1/$2 [L]
 

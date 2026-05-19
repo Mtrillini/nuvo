@@ -213,7 +213,7 @@ function renderMasVendidos(section, lista) {
 
   const verTodos = document.createElement('a');
   verTodos.textContent = 'VER TODOS LOS PRODUCTOS';
-  verTodos.href = '/nuvo/frontend/productos.html';
+  verTodos.href = (typeof PAGES_BASE !== 'undefined' ? PAGES_BASE : '') + '/productos';
   Object.assign(verTodos.style, {
     fontFamily: "'Montserrat', sans-serif",
     fontSize: '0.68rem', fontWeight: '500', letterSpacing: '2.5px',
