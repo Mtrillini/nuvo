@@ -3,6 +3,15 @@ Options -Indexes
 <IfModule mod_rewrite.c>
   RewriteEngine On
 
-  # Redirect root to frontend
-  RewriteRule ^$ frontend/index.html [L,R=302]
+  # No reescribir archivos/carpetas que existen
+  RewriteCond %{REQUEST_FILENAME} -f [OR]
+  RewriteCond %{REQUEST_FILENAME} -d
+  RewriteRule ^ - [L]
+
+  # Raiz → homepage (sin redirect, URL queda como nuvearg.com/)
+  RewriteRule ^$ frontend/index.html [L]
+
+  # Páginas frontend sin /frontend/ en la URL
+  # nuvearg.com/productos.html → sirve frontend/productos.html
+  RewriteRule ^([a-z][a-z0-9-]*)\.html$ frontend/$1.html [L]
 </IfModule>

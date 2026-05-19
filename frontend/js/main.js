@@ -17,28 +17,28 @@ function getNavbarHTML() {
     <header class="navbar" id="main-navbar">
 
       <div class="navbar__logo-wrap">
-        <a href="${APP_BASE}/frontend/index.html">
+        <a href="${PAGES_BASE}/index.html">
           <img src="${APP_BASE}/frontend/images/logo-nuve.png" alt="NÜVE" class="navbar__logo-img">
         </a>
       </div>
 
       <nav class="navbar__nav">
-        <a href="${APP_BASE}/frontend/index.html" class="navbar__link" data-page="index">INICIO</a>
+        <a href="${PAGES_BASE}/index.html" class="navbar__link" data-page="index">INICIO</a>
         <div class="navbar__dropdown">
-          <a href="${APP_BASE}/frontend/productos.html" class="navbar__link" data-page="productos">PERFUMES</a>
+          <a href="${PAGES_BASE}/productos.html" class="navbar__link" data-page="productos">PERFUMES</a>
           <div class="navbar__dropdown-menu">
-            <a href="${APP_BASE}/frontend/productos.html?genero=femenino" class="navbar__dropdown-item">FEMENINOS</a>
-            <a href="${APP_BASE}/frontend/productos.html?genero=masculino" class="navbar__dropdown-item">MASCULINOS</a>
+            <a href="${PAGES_BASE}/productos.html?genero=femenino" class="navbar__dropdown-item">FEMENINOS</a>
+            <a href="${PAGES_BASE}/productos.html?genero=masculino" class="navbar__dropdown-item">MASCULINOS</a>
           </div>
         </div>
-        <a href="${APP_BASE}/frontend/nosotros.html" class="navbar__link" data-page="nosotros">SOBRE NÜVE</a>
+        <a href="${PAGES_BASE}/nosotros.html" class="navbar__link" data-page="nosotros">SOBRE NÜVE</a>
       </nav>
 
       <div class="navbar__icons">
         <a href="#" class="navbar__icon-link">
           <i class="fa-regular fa-user"></i>
         </a>
-        <a href="${APP_BASE}/frontend/carrito.html" class="navbar__cart" aria-label="Carrito">
+        <a href="${PAGES_BASE}/carrito.html" class="navbar__cart" aria-label="Carrito">
           <i class="fa-solid fa-bag-shopping"></i>
           <span class="cart-badge" id="cart-badge" style="display:none;">0</span>
         </a>
@@ -50,12 +50,12 @@ function getNavbarHTML() {
     </header>
 
     <div class="mobile-menu" id="mobile-menu">
-      <a href="${APP_BASE}/frontend/index.html">Inicio</a>
-      <a href="${APP_BASE}/frontend/productos.html">Perfumes</a>
-      <a href="${APP_BASE}/frontend/productos.html?genero=femenino">Perfumes Femeninos</a>
-      <a href="${APP_BASE}/frontend/productos.html?genero=masculino">Perfumes Masculinos</a>
-      <a href="${APP_BASE}/frontend/nosotros.html">Sobre NÜVE</a>
-      <a href="${APP_BASE}/frontend/carrito.html">Carrito</a>
+      <a href="${PAGES_BASE}/index.html">Inicio</a>
+      <a href="${PAGES_BASE}/productos.html">Perfumes</a>
+      <a href="${PAGES_BASE}/productos.html?genero=femenino">Perfumes Femeninos</a>
+      <a href="${PAGES_BASE}/productos.html?genero=masculino">Perfumes Masculinos</a>
+      <a href="${PAGES_BASE}/nosotros.html">Sobre NÜVE</a>
+      <a href="${PAGES_BASE}/carrito.html">Carrito</a>
     </div>
   `;
 }
@@ -99,10 +99,10 @@ function getFooterHTML() {
         <div>
           <div class="footer__heading">Navegación</div>
           <nav class="footer__nav">
-            <a href="${APP_BASE}/frontend/index.html">Inicio</a>
-            <a href="${APP_BASE}/frontend/productos.html">Perfumes</a>
-            <a href="${APP_BASE}/frontend/nosotros.html">Nosotros</a>
-            <a href="${APP_BASE}/frontend/contacto.html">Contacto</a>
+            <a href="${PAGES_BASE}/index.html">Inicio</a>
+            <a href="${PAGES_BASE}/productos.html">Perfumes</a>
+            <a href="${PAGES_BASE}/nosotros.html">Nosotros</a>
+            <a href="${PAGES_BASE}/contacto.html">Contacto</a>
           </nav>
         </div>
 
