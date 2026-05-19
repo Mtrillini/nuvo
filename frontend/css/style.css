@@ -505,7 +505,7 @@ h1, h2, h3, h4, h5, h6 {
 
 .colecciones-panel__title {
   font-family: var(--font-primary);
-  font-size: clamp(2.2rem, 4vw, 3.5rem);
+  font-size: clamp(1.4rem, 2.8vw, 2.2rem);
   font-weight: 300;
   letter-spacing: 0.05em;
   line-height: 1;
@@ -2200,7 +2200,7 @@ body.page-productos .section {
   /* ---- Colecciones ---- */
   .colecciones-panels    { flex-direction: column; }
   .colecciones-panel     { padding: 3rem 1.5rem; min-height: 160px; }
-  .colecciones-panel__title { font-size: 1.8rem; }
+  .colecciones-panel__title { font-size: 1.4rem; }
 
   /* ---- Más Vendidos ---- */
   .mv-header             { flex-direction: column; gap: 0.5rem; margin-bottom: 1rem; }
@@ -2313,7 +2313,7 @@ body.page-productos .section {
   .navbar__logo-img      { height: 44px; }
   .hero-slider           { height: 45vh; }
   .colecciones-panel     { min-height: 115px; padding: 1.75rem 0.875rem; }
-  .colecciones-panel__title { font-size: 1.5rem; }
+  .colecciones-panel__title { font-size: 1.2rem; }
   .mas-vendidos__grid > * { min-width: 80vw; max-width: 80vw; }
   .mv-card__img-wrap     { height: 160px; }
   .productos-grid-nuve   { grid-template-columns: 1fr 1fr; gap: 0.4rem; }
