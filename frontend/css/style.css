@@ -2168,11 +2168,10 @@ body.page-productos .section {
   .slider__slide img     { object-position: center top; }
 
   /* ---- Promo bar ---- */
-  .promo-bar             { margin-top: 64px; padding: 0.6rem 0.75rem; }
-  .promo-bar__sep        { display: none; }
-  .promo-bar__items      { gap: 0.4rem; justify-content: space-around; flex-wrap: nowrap; }
-  .promo-bar__item       { font-size: 0.52rem; letter-spacing: 0.5px; gap: 0.25rem; }
+  .promo-bar             { margin-top: 64px; padding: 0.55rem 0; }
+  .promo-bar__item       { font-size: 0.58rem; letter-spacing: 1px; gap: 0.25rem; }
   .promo-bar__item i     { font-size: 0.7rem; }
+  .promo-bar__items      { gap: 1.5rem; padding: 0 1.5rem; }
 
   /* ---- Colecciones ---- */
   .colecciones-panels    { flex-direction: column; }
@@ -2278,20 +2277,32 @@ body.page-productos .section {
 /* ============================================================
    PROMO BAR
    ============================================================ */
+@keyframes promo-marquee {
+  0%   { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
 .promo-bar {
   width: 100%;
   background: #0a0a0a;
   border-bottom: 1px solid rgba(200,169,126,0.25);
-  padding: 0.85rem 2rem;
+  padding: 0.85rem 0;
   margin-top: 10vh;
+  overflow: hidden;
+}
+
+.promo-bar__track {
+  display: flex;
+  width: max-content;
+  animation: promo-marquee 28s linear infinite;
 }
 
 .promo-bar__items {
   display: flex;
   align-items: center;
-  justify-content: center;
-  gap: 2rem;
-  flex-wrap: wrap;
+  gap: 2.5rem;
+  flex-shrink: 0;
+  padding: 0 2.5rem;
 }
 
 .promo-bar__item {
@@ -2299,20 +2310,21 @@ body.page-productos .section {
   font-size: 0.72rem;
   font-weight: 400;
   letter-spacing: 2px;
-  color: #e8d8c7;
+  color: #ffffff;
   display: flex;
   align-items: center;
   gap: 0.5rem;
   text-transform: uppercase;
+  white-space: nowrap;
 }
 
 .promo-bar__item i {
-  color: #c8a97e;
+  color: #ffffff;
   font-size: 0.85rem;
 }
 
 .promo-bar__sep {
-  color: #c8a97e;
+  color: rgba(255,255,255,0.4);
   font-size: 0.55rem;
 }
 
