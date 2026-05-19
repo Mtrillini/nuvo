@@ -2340,7 +2340,7 @@ body.page-productos .section {
    MÁS VENDIDOS (homepage)
    ============================================================ */
 .mas-vendidos__section {
-  background: #ffffff;
+  background: linear-gradient(to bottom, #ffffff, #1a1a1a);
   padding: 4rem 3rem;
 }
 
