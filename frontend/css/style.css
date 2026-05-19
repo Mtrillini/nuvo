@@ -2156,89 +2156,98 @@ body.page-productos .section {
    ============================================================ */
 @media (max-width: 768px) {
   /* ---- Navbar ---- */
-  .navbar                { height: 64px; padding: 0 1.25rem; }
-  .navbar__logo-img      { height: 46px; }
+  .navbar                { height: 60px; padding: 0 1rem; }
+  .navbar__logo-img      { height: 40px; }
   .navbar__nav           { display: none; }
   .navbar__icon-link     { display: none; }
   .navbar__hamburger     { display: flex; }
-  .mobile-menu           { top: 64px; left: 0; right: 0; width: 100%; }
+  .mobile-menu           { top: 60px; left: 0; right: 0; width: 100%; }
 
   /* ---- Hero slider ---- */
-  .hero-slider           { height: 78vh; }
-  .slider__slide img     { object-position: center top; }
+  .hero-slider           { height: 55vh; }
+  .slider__slide img     { object-position: center center; }
 
   /* ---- Promo bar ---- */
-  .promo-bar             { margin-top: 64px; padding: 0.55rem 0; }
+  .promo-bar             { padding: 0.55rem 0; }
   .promo-bar__item       { font-size: 0.58rem; letter-spacing: 1px; gap: 0.25rem; }
   .promo-bar__item i     { font-size: 0.7rem; }
-  .promo-bar__items      { gap: 1.5rem; padding: 0 1.5rem; }
+  .promo-bar__items      { gap: 1.5rem; padding: 0 1rem; }
 
   /* ---- Colecciones ---- */
   .colecciones-panels    { flex-direction: column; }
-  .colecciones-panel     { padding: 2.5rem 1.5rem; min-height: 190px; }
+  .colecciones-panel     { padding: 3rem 1.5rem; min-height: 160px; }
+  .colecciones-panel__title { font-size: 1.8rem; }
 
   /* ---- Más Vendidos ---- */
-  .mv-header             { flex-direction: column; gap: 0.5rem; margin-bottom: 1.5rem; }
-  .mas-vendidos__section { padding: 2.5rem 1rem; }
-  .mas-vendidos__grid    { grid-template-columns: 1fr; gap: 0.75rem; }
-  .mv-card__img-wrap     { height: 180px; }
+  .mv-header             { flex-direction: column; gap: 0.5rem; margin-bottom: 1.25rem; }
+  .mas-vendidos__section { padding: 2rem 1rem; }
+  .mas-vendidos__grid    { grid-template-columns: repeat(2, 1fr); gap: 0.75rem; }
+  .mv-card__img-wrap     { height: 160px; }
 
   /* ---- Productos ---- */
   body.page-productos .section  { padding: 1rem; }
-  .productos-grid-nuve          { grid-template-columns: 1fr !important; gap: 1rem; }
+  .productos-grid-nuve          { grid-template-columns: repeat(2, 1fr); gap: 0.75rem; }
   .filter-bar                   { flex-direction: column; align-items: stretch; padding: 0; gap: 0.5rem; }
   .filter-bar__search           { min-width: unset; width: 100%; }
   .filter-bar__select           { min-width: unset; width: 100%; }
   .filter-genero                { justify-content: center; }
-  .nuve-card__img-wrap          { height: 200px; }
-  .nuve-card__body              { padding: 0.9rem; }
-  .nuve-card__btn               { font-size: 0.58rem; letter-spacing: 1.5px; padding: 0.65rem; }
+  .nuve-card__img-wrap          { height: 180px; }
+  .nuve-card__body              { padding: 0.75rem; }
+  .nuve-card__nombre            { font-size: 0.85rem; }
+  .nuve-card__btn               { font-size: 0.55rem; letter-spacing: 1.5px; padding: 0.6rem; }
 
   /* ---- Cart / Checkout ---- */
-  .cart-page-header      { padding: 1.25rem 1rem 0; }
-  .cart-page-title       { font-size: 1.3rem; letter-spacing: 3px; }
+  .cart-page-header      { padding: 1rem 1rem 0; }
+  .cart-page-title       { font-size: 1.2rem; letter-spacing: 3px; }
   .cart-layout,
-  .checkout-layout       { padding: 1.25rem 1rem 3rem; gap: 1.5rem; }
-  .cart-item             { grid-template-columns: 75px 1fr; gap: 0.75rem; padding: 1rem 0; }
-  .cart-item__img-wrap   { height: 80px; }
+  .checkout-layout       { padding: 1rem 1rem 3rem; gap: 1.25rem; }
+  .cart-item             { grid-template-columns: 70px 1fr; gap: 0.6rem; padding: 0.9rem 0; }
+  .cart-item__img-wrap   { height: 75px; }
   .cart-item__right      { grid-column: 2; flex-direction: row; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 0.4rem; }
-  .cart-item__name       { font-size: 0.88rem; }
-  .order-summary         { padding: 1.25rem; }
-  .order-summary__title  { font-size: 1.1rem; }
+  .cart-item__name       { font-size: 0.85rem; }
+  .order-summary         { padding: 1.1rem; }
+  .order-summary__title  { font-size: 1rem; }
 
   /* ---- Checkout form ---- */
-  .checkout-progress     { margin-bottom: 1.25rem; }
-  .checkout-form__title  { font-size: 1.1rem; letter-spacing: 2px; }
-  .form-grid             { grid-template-columns: 1fr; gap: 1.25rem; }
+  .checkout-progress     { margin-bottom: 1rem; }
+  .checkout-form__title  { font-size: 1rem; letter-spacing: 2px; }
+  .form-grid             { grid-template-columns: 1fr; gap: 1rem; }
   .form-group--full      { grid-column: 1; }
 
   /* ---- Newsletter ---- */
-  .newsletter            { padding: 1.75rem 1.25rem; }
-  .newsletter__title     { font-size: 1.1rem; }
+  .newsletter            { padding: 2rem 1.25rem; }
+  .newsletter__title     { font-size: 1rem; }
   .newsletter__form      { flex-direction: column; }
   .newsletter__input     { border-right: 1px solid var(--negro); }
 
   /* ---- Footer ---- */
-  .footer__top           { grid-template-columns: 1fr; gap: 2rem; padding: 3rem 1.5rem 0; }
-  .footer__logo-img      { height: 65px; }
-  .footer__bottom        { padding: 1.5rem; }
+  .footer                { padding: 1.5rem 1rem 0.5rem; }
+  .footer__top           { grid-template-columns: 1fr; gap: 1.5rem; }
+  .footer__logo-img      { height: 45px; }
+  .footer__bottom        { padding-top: 1rem; }
+  .footer__heading       { margin-bottom: 0.75rem; }
 
   /* ---- Modal ---- */
-  .prod-modal__box       { width: 100%; }
+  .prod-modal__box       { width: 100%; max-height: 92vh; overflow-y: auto; flex-direction: column; }
+  .prod-modal__img-wrap  { width: 100%; max-height: 260px; }
 
   /* ---- Section generic ---- */
-  .section               { padding: 2.5rem 1rem; }
+  .section               { padding: 2rem 1rem; }
 }
 
 /* ============================================================
    RESPONSIVE - SMALL MOBILE (≤ 480px)
    ============================================================ */
 @media (max-width: 480px) {
-  .hero-slider           { height: 82vh; }
-  .mv-card__img-wrap     { height: 220px; }
-  .productos-grid-nuve   { grid-template-columns: repeat(2, 1fr); }
-  .colecciones-panel     { min-height: 165px; }
-  .promo-bar__items      { flex-wrap: wrap; gap: 0.4rem; }
+  .hero-slider           { height: 50vh; }
+  .productos-grid-nuve   { grid-template-columns: repeat(2, 1fr); gap: 0.5rem; }
+  .nuve-card__img-wrap   { height: 150px; }
+  .nuve-card__nombre     { font-size: 0.78rem; }
+  .nuve-card__btn        { font-size: 0.5rem; padding: 0.5rem; }
+  .colecciones-panel     { min-height: 140px; padding: 2.5rem 1rem; }
+  .mas-vendidos__grid    { grid-template-columns: repeat(2, 1fr); gap: 0.5rem; }
+  .mv-card__img-wrap     { height: 140px; }
+  .promo-bar__items      { gap: 1rem; }
 }
 
 /* ============================================================
