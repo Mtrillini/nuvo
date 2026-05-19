@@ -2181,7 +2181,8 @@ body.page-productos .section {
   /* ---- Más Vendidos ---- */
   .mv-header             { flex-direction: column; gap: 0.5rem; margin-bottom: 1.25rem; }
   .mas-vendidos__section { padding: 2rem 1rem; }
-  .mas-vendidos__grid    { grid-template-columns: repeat(2, 1fr); gap: 0.75rem; }
+  .mas-vendidos__grid    { display: flex; flex-wrap: nowrap; overflow-x: auto; gap: 0.75rem; padding-bottom: 0.75rem; scroll-snap-type: x mandatory; -webkit-overflow-scrolling: touch; }
+  .mas-vendidos__grid > * { min-width: 220px; flex-shrink: 0; scroll-snap-align: start; }
   .mv-card__img-wrap     { height: 160px; }
 
   /* ---- Productos ---- */
@@ -2245,7 +2246,7 @@ body.page-productos .section {
   .nuve-card__nombre     { font-size: 0.78rem; }
   .nuve-card__btn        { font-size: 0.5rem; padding: 0.5rem; }
   .colecciones-panel     { min-height: 140px; padding: 2.5rem 1rem; }
-  .mas-vendidos__grid    { grid-template-columns: repeat(2, 1fr); gap: 0.5rem; }
+  .mas-vendidos__grid > * { min-width: 180px; }
   .mv-card__img-wrap     { height: 140px; }
   .promo-bar__items      { gap: 1rem; }
 }
