@@ -10,7 +10,7 @@ async function checkAuth() {
     const json = await res.json();
 
     if (!json.success || !json.authenticated) {
-      window.location.href = '/nuvo/admin/login.html';
+      window.location.href = APP_BASE + '/admin/login.html';
       return false;
     }
 
@@ -22,7 +22,7 @@ async function checkAuth() {
 
     return true;
   } catch {
-    window.location.href = '/nuvo/admin/login.html';
+    window.location.href = APP_BASE + '/admin/login.html';
     return false;
   }
 }
@@ -39,7 +39,7 @@ async function login(username, password) {
     const json = await res.json();
 
     if (json.success) {
-      window.location.href = '/nuvo/admin/dashboard.html';
+      window.location.href = APP_BASE + '/admin/dashboard.html';
     } else {
       return { success: false, message: json.message || 'Error de autenticación.' };
     }
@@ -55,7 +55,7 @@ async function logout() {
       credentials: 'include',
     });
   } catch { /* ignore */ }
-  window.location.href = '/nuvo/admin/login.html';
+  window.location.href = APP_BASE + '/admin/login.html';
 }
 
 // ---- Toast for admin ----
