@@ -35,9 +35,6 @@ function getNavbarHTML() {
       </nav>
 
       <div class="navbar__icons">
-        <a href="#" class="navbar__icon-link">
-          <i class="fa-regular fa-user"></i>
-        </a>
         <a href="${PAGES_BASE}/carrito" class="navbar__cart" aria-label="Carrito">
           <i class="fa-solid fa-bag-shopping"></i>
           <span class="cart-badge" id="cart-badge" style="display:none;">0</span>

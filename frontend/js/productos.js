@@ -47,8 +47,7 @@ function renderProductos(lista) {
   if (!lista.length) {
     container.innerHTML = `
       <div class="empty-state">
-        <div class="empty-state__icon">◇</div>
-        <div class="empty-state__title">No hay productos disponibles</div>
+<div class="empty-state__title">No hay productos disponibles</div>
         <p class="empty-state__text">Pronto tendremos nuevas fragancias. Volvé pronto.</p>
       </div>`;
     return;
