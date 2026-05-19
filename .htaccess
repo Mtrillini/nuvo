@@ -1,15 +1,13 @@
-Options -Indexes
+DirectoryIndex frontend/index.html
 
 <IfModule mod_rewrite.c>
   RewriteEngine On
+  RewriteBase /
 
-  # No reescribir archivos o carpetas que existen
+  # No reescribir archivos o carpetas existentes
   RewriteCond %{REQUEST_FILENAME} -f [OR]
   RewriteCond %{REQUEST_FILENAME} -d
   RewriteRule ^ - [L]
-
-  # Raiz → homepage
-  RewriteRule ^$ frontend/index.html [L]
 
   # URLs limpias: /productos → frontend/productos.html
   RewriteRule ^([a-z][a-z0-9-]*)/?$ frontend/$1.html [L]
