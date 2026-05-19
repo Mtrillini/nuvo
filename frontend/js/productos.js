@@ -206,7 +206,7 @@ function renderMasVendidos(section, lista) {
   title.textContent = 'MÁS VENDIDOS';
   Object.assign(title.style, {
     fontFamily: "'Cormorant', Georgia, serif",
-    fontSize: '2rem', fontWeight: '300', letterSpacing: '4px',
+    fontSize: '1rem', fontWeight: '300', letterSpacing: '4px',
     color: '#1a1a1a', marginBottom: '0.4rem',
   });
   titleWrap.appendChild(title);
