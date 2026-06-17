@@ -18,10 +18,46 @@ function mapProducto(p) {
     imagenes:    (p.imagenes || []).map(i => i.url),
     descripcion: p.descripcion || '',
     nota:        p.nota_olfativa || '',
-    stock:       parseInt(p.stock) || 0,
+    stock:       parseInt(p.stock_disponible ?? p.stock) || 0,
     genero:      p.tipo,
   };
 }
+
+// ---- Slider de imágenes dentro de cada card (flechas a los costados) ----
+function escAttr(s) { return String(s == null ? '' : s).replace(/"/g, '&quot;'); }
+
+function cardSliderHTML(imgs, alt, fallback) {
+  const list  = (imgs && imgs.length) ? imgs : (fallback ? [fallback] : []);
+  const first = list[0] || '';
+  // JSON dentro de atributo: lo guardamos con comillas simples escapadas
+  const dataImgs = JSON.stringify(list).replace(/'/g, '&#39;');
+  const arrows = list.length > 1 ? `
+      <button type="button" class="card-slider__arrow card-slider__arrow--prev" aria-label="Imagen anterior">&#8249;</button>
+      <button type="button" class="card-slider__arrow card-slider__arrow--next" aria-label="Imagen siguiente">&#8250;</button>` : '';
+  return `<div class="card-slider" data-idx="0" data-imgs='${dataImgs}'>
+      <img class="card-slider__img" src="${first}" alt="${escAttr(alt)}" loading="lazy">${arrows}
+    </div>`;
+}
+
+// Navegación de las flechas (delegada, una sola vez para todas las cards)
+document.addEventListener('click', e => {
+  const arrow = e.target.closest('.card-slider__arrow');
+  if (!arrow) return;
+  e.preventDefault();
+  e.stopPropagation();              // no abrir el modal al tocar la flecha
+  const slider = arrow.closest('.card-slider');
+  if (!slider) return;
+  let imgs;
+  try { imgs = JSON.parse(slider.dataset.imgs); } catch (_) { imgs = []; }
+  if (imgs.length < 2) return;
+  let idx = parseInt(slider.dataset.idx, 10) || 0;
+  idx = arrow.classList.contains('card-slider__arrow--next')
+    ? (idx + 1) % imgs.length
+    : (idx - 1 + imgs.length) % imgs.length;
+  slider.dataset.idx = idx;
+  const img = slider.querySelector('.card-slider__img');
+  if (img) img.src = imgs[idx];
+});
 
 // ---- Fetch all products ----
 async function fetchAllProductos() {
@@ -53,20 +89,27 @@ function renderProductos(lista) {
     return;
   }
 
-  container.innerHTML = lista.map(p => `
-    <div class="nuve-card" onclick="abrirModal(${p.id})">
+  container.innerHTML = lista.map(p => {
+    const imgs = (p.imagenes && p.imagenes.length) ? p.imagenes : (p.img ? [p.img] : []);
+    return `
+    <div class="nuve-card" onclick="${p.stock > 0 ? `abrirModal(${p.id})` : ''}">
       <div class="nuve-card__img-wrap">
-        <img src="${p.img || '${APP_BASE}/frontend/images/logo-nuve.png'}" alt="${p.nombre}" loading="lazy">
+        ${cardSliderHTML(imgs, p.nombre, p.img)}
       </div>
       <div class="nuve-card__body">
         <div class="nuve-card__nombre">${p.nombre}</div>
         <div class="nuve-card__marca">${p.marca}</div>
         <div class="nuve-card__tipo">${p.nota ? p.nota.slice(0, 60) : ''}</div>
         <div class="nuve-card__precio">${fmt(p.precio)}</div>
-        <button class="nuve-card__btn" onclick="event.stopPropagation(); abrirModal(${p.id})">AGREGAR AL CARRITO</button>
+        <button
+          class="nuve-card__btn${p.stock === 0 ? ' nuve-card__btn--agotado' : ''}"
+          ${p.stock === 0 ? 'disabled style="opacity:0.5;cursor:not-allowed;"' : `onclick="event.stopPropagation(); abrirModal(${p.id})"`}>
+          ${p.stock === 0 ? 'SIN STOCK' : 'AGREGAR AL CARRITO'}
+        </button>
       </div>
     </div>
-  `).join('');
+  `;
+  }).join('');
 }
 
 // ---- Filtro + sort ----
@@ -92,6 +135,22 @@ function aplicarFiltros() {
 // ---- Modal ----
 let modalProductoActual = null;
 let modalQty = 1;
+let modalImgs = [];
+let modalImgIdx = 0;
+
+function modalGoTo(i) {
+  if (!modalImgs.length) return;
+  modalImgIdx = (i + modalImgs.length) % modalImgs.length;
+  const main = document.getElementById('modal-img');
+  if (main) main.src = modalImgs[modalImgIdx];
+  document.querySelectorAll('#modal-thumbs img').forEach((t, ti) => {
+    t.style.border = '2px solid ' + (ti === modalImgIdx ? '#1a1a1a' : 'transparent');
+  });
+}
+
+function modalSlide(delta) { modalGoTo(modalImgIdx + delta); }
+window.modalGoTo = modalGoTo;
+window.modalSlide = modalSlide;
 
 function abrirModal(id) {
   const p = PRODUCTOS.find(x => x.id === id);
@@ -100,9 +159,33 @@ function abrirModal(id) {
   modalQty = 1;
 
   const imgs = p.imagenes && p.imagenes.length ? p.imagenes : (p.img ? [p.img] : []);
+  modalImgs = imgs;
+  modalImgIdx = 0;
   const mainImg = document.getElementById('modal-img');
   mainImg.src = imgs[0] || '';
   mainImg.alt = p.nombre;
+
+  // Flechas de navegación dentro del modal (se inyectan una vez por apertura)
+  const imgWrap = document.querySelector('#producto-modal .prod-modal__img-wrap');
+  if (imgWrap) {
+    imgWrap.querySelectorAll('.prod-modal__arrow').forEach(a => a.remove());
+    if (imgs.length > 1) {
+      const prev = document.createElement('button');
+      prev.type = 'button';
+      prev.className = 'prod-modal__arrow prod-modal__arrow--prev';
+      prev.setAttribute('aria-label', 'Imagen anterior');
+      prev.innerHTML = '&#8249;';
+      prev.onclick = () => modalSlide(-1);
+      const next = document.createElement('button');
+      next.type = 'button';
+      next.className = 'prod-modal__arrow prod-modal__arrow--next';
+      next.setAttribute('aria-label', 'Imagen siguiente');
+      next.innerHTML = '&#8250;';
+      next.onclick = () => modalSlide(1);
+      imgWrap.appendChild(prev);
+      imgWrap.appendChild(next);
+    }
+  }
 
   document.getElementById('modal-marca').textContent  = p.marca;
   document.getElementById('modal-nombre').textContent = p.nombre;
@@ -119,10 +202,8 @@ function abrirModal(id) {
       thumbsEl.innerHTML = imgs.map((url, i) => `
         <img
           src="${url}"
-          onclick="document.getElementById('modal-img').src='${url}'"
+          onclick="modalGoTo(${i})"
           style="width:52px;height:52px;object-fit:cover;border-radius:3px;cursor:pointer;border:2px solid ${i === 0 ? '#1a1a1a' : 'transparent'};transition:border 0.2s;"
-          onmouseover="this.style.border='2px solid #1a1a1a'"
-          onmouseout="this.style.border='2px solid ${i === 0 ? '#1a1a1a' : 'transparent'}'"
         >
       `).join('');
     } else {
@@ -152,12 +233,17 @@ function cerrarModal() {
 }
 
 function cambiarQty(delta) {
-  modalQty = Math.max(1, modalQty + delta);
+  const maxQty = modalProductoActual ? (modalProductoActual.stock || 1) : 999;
+  modalQty = Math.max(1, Math.min(modalQty + delta, maxQty));
   document.getElementById('modal-qty').textContent = modalQty;
 }
 
 function agregarDesdeModal() {
   if (!modalProductoActual) return;
+  if (modalProductoActual.stock === 0) {
+    window.showToast('Este producto no tiene stock disponible.', 'error');
+    return;
+  }
   if (typeof window.Carrito !== 'undefined') {
     window.Carrito.agregar({ ...modalProductoActual }, modalQty);
     window.showToast(`"${modalProductoActual.nombre}" agregado al carrito.`, 'success');
@@ -248,11 +334,8 @@ function renderMasVendidos(section, lista) {
 
     const imgWrap     = document.createElement('div');
     imgWrap.className  = 'mv-card__img-wrap';
-    const img          = document.createElement('img');
-    img.src   = p.img || '${APP_BASE}/frontend/images/logo-nuve.png';
-    img.alt   = p.nombre;
-    Object.assign(img.style, { width: '100%', height: '100%', objectFit: 'contain' });
-    imgWrap.appendChild(img);
+    const mvImgs = (p.imagenes && p.imagenes.length) ? p.imagenes : (p.img ? [p.img] : []);
+    imgWrap.innerHTML = cardSliderHTML(mvImgs, p.nombre, p.img);
 
     const info = document.createElement('div');
     Object.assign(info.style, { padding: '1.2rem 1.2rem 1.4rem' });
@@ -292,15 +375,22 @@ function renderMasVendidos(section, lista) {
       fontSize: '0.65rem', fontWeight: '600', letterSpacing: '2.5px',
       cursor: 'pointer', transition: 'background 0.3s',
     });
-    btn.addEventListener('mouseenter', () => btn.style.background = '#3a2810');
-    btn.addEventListener('mouseleave', () => btn.style.background = '#1a1a1a');
-    btn.addEventListener('click', e => {
-      e.stopPropagation();
-      if (typeof window.Carrito !== 'undefined') {
-        window.Carrito.agregar({ ...p }, 1);
-        window.showToast(`"${p.nombre}" agregado al carrito.`, 'success');
-      }
-    });
+    if (p.stock === 0) {
+      btn.textContent = 'SIN STOCK';
+      btn.disabled = true;
+      btn.style.opacity = '0.5';
+      btn.style.cursor = 'not-allowed';
+    } else {
+      btn.addEventListener('mouseenter', () => btn.style.background = '#3a2810');
+      btn.addEventListener('mouseleave', () => btn.style.background = '#1a1a1a');
+      btn.addEventListener('click', e => {
+        e.stopPropagation();
+        if (typeof window.Carrito !== 'undefined') {
+          window.Carrito.agregar({ ...p }, 1);
+          window.showToast(`"${p.nombre}" agregado al carrito.`, 'success');
+        }
+      });
+    }
 
     info.appendChild(nombreEl);
     info.appendChild(tipoEl);
