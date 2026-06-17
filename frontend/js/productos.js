@@ -39,12 +39,15 @@ function cardSliderHTML(imgs, alt, fallback) {
     </div>`;
 }
 
-// Navegación de las flechas (delegada, una sola vez para todas las cards)
+// Navegación de las flechas (delegada, una sola vez para todas las cards).
+// Se escucha en fase de CAPTURA para frenar el click ANTES de que la card
+// dispare su handler de abrir el modal.
 document.addEventListener('click', e => {
   const arrow = e.target.closest('.card-slider__arrow');
   if (!arrow) return;
   e.preventDefault();
   e.stopPropagation();              // no abrir el modal al tocar la flecha
+  e.stopImmediatePropagation();
   const slider = arrow.closest('.card-slider');
   if (!slider) return;
   let imgs;
@@ -57,7 +60,7 @@ document.addEventListener('click', e => {
   slider.dataset.idx = idx;
   const img = slider.querySelector('.card-slider__img');
   if (img) img.src = imgs[idx];
-});
+}, true);
 
 // ---- Fetch all products ----
 async function fetchAllProductos() {
@@ -326,7 +329,7 @@ function renderMasVendidos(section, lista) {
     const badge = document.createElement('span');
     badge.textContent = '#' + p.rank;
     Object.assign(badge.style, {
-      position: 'absolute', top: '12px', left: '12px',
+      position: 'absolute', top: '12px', left: '3px', zIndex: '4',
       background: '#e8ddd0', color: '#6b5a45',
       fontSize: '0.6rem', fontWeight: '600', letterSpacing: '1px',
       padding: '3px 7px', borderRadius: '2px',
