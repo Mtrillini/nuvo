@@ -2569,7 +2569,7 @@ body.page-productos .section {
 }
 
 .nuve-card__img-wrap {
-  background: #f9f6f2;
+  background: #ffffff;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -2586,6 +2586,64 @@ body.page-productos .section {
 
 .nuve-card:hover .nuve-card__img-wrap img {
   transform: scale(1.04);
+}
+
+/* ============================================================
+   SLIDER DE IMÁGENES EN CARDS (flechas a los costados)
+   ============================================================ */
+.card-slider {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.card-slider__img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  transition: transform 0.4s ease;
+}
+
+.card-slider__arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.85);
+  border: 1px solid #e8e0d8;
+  color: #1a1a1a;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.15rem;
+  line-height: 1;
+  padding: 0;
+  cursor: pointer;
+  z-index: 3;
+  opacity: 0;
+  transition: opacity 0.25s ease, background 0.2s ease;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.12);
+}
+
+.card-slider:hover .card-slider__arrow {
+  opacity: 1;
+}
+
+.card-slider__arrow:hover {
+  background: #ffffff;
+}
+
+.card-slider__arrow--prev { left: 6px; }
+.card-slider__arrow--next { right: 6px; }
+
+/* En táctil no hay hover: dejamos las flechas siempre visibles */
+@media (hover: none), (max-width: 768px) {
+  .card-slider__arrow { opacity: 0.9; }
 }
 
 .nuve-card__body {
@@ -2710,6 +2768,7 @@ body.page-productos .section {
 .prod-modal__close:hover { color: #1a1a1a; }
 
 .prod-modal__img-wrap {
+  position: relative;
   background: #ffffff;
   display: flex;
   align-items: center;
@@ -2725,6 +2784,32 @@ body.page-productos .section {
   max-width: 100%;
   object-fit: contain;
 }
+
+.prod-modal__arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.9);
+  border: 1px solid #e8e0d8;
+  color: #1a1a1a;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.25rem;
+  line-height: 1;
+  padding: 0;
+  cursor: pointer;
+  z-index: 3;
+  transition: background 0.2s ease;
+  box-shadow: 0 1px 5px rgba(0, 0, 0, 0.15);
+}
+
+.prod-modal__arrow:hover { background: #ffffff; }
+.prod-modal__arrow--prev { left: 10px; }
+.prod-modal__arrow--next { right: 10px; }
 
 .prod-modal__info {
   padding: 1.4rem 1.75rem 2rem;
